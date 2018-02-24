@@ -1,0 +1,4796 @@
+<html><head><meta charset="UTF-8"><title>Calculator</title>
+<link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlz AAAOwgAADsIBFShKgAAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4yMIYnWQMAAABcSURB VFhH7Y6xCQAwDMPy/9PtA4Fgq0MxEXjwIlTL75xHs+lkzmyoYAM2ICeAzqaTObOhgrwA+mUmofpl qCAvgH6ZSah+GSrIC6BfZhKqX4YKcgLobDqZs+VXqi4L+t8hSzI+NAAAAABJRU5ErkJggg== " image-rendering="optimizeSpeed"  rel="icon" type="image/x-icon">
+<style>
+html, body {background:#ffffff; font:14px verdana, sans-serif;}
+table {border:1px solid black; border-collapse:collapse;margin: auto;}
+input {background:#d0d0d0; margin:2px 2px 2px 2px; border:0 none;}
+.btntable {width:100px; height:100px; font-size:300%;}
+.btnf0 {background-color:#f0f0f0;}
+.btne0 {background:#e0e0e0;}
+.btnd0 {background:#d0d0d0;}
+.btnfloat {background-color: #b0b0ff; font-size:275%;}
+.btndel {background-color: #ffb0b0; font-size:275%;}
+.btnclear {background-color: #ffb0b0;}
+.btnequal {background-color: #b0ffb0;}
+.btnf0:hover {background-color:#e0e0e0;}
+.btne0:hover {background:#89bfe5;}
+.btnd0:hover {background:#72b5e5;}
+.btnfloat:hover {background-color: #a0a0ff; font-size:275%;}
+.btndel:hover {background-color: #ffa0a0; font-size:275%;}
+.btnclear:hover {background-color: #ffa0a0;}
+.btnequal:hover {background-color: #a0ffa0;}
+.chistorybutton {background-color: #d0d0d0; width: 200px; height: 50px; font-size: 175%;}
+.chistorybutton:hover {background-color: #72b5e5;}
+.chistorybuttonclear {background-color: #d0d0d0; width: 200px; height: 50px; font-size: 175%;}
+.chistorybuttonclear:hover {background-color: #ffa0a0;}
+.optionbtn {background-color: #ffffff; color: #7298e5; width: 200px; height: 25px; font-size: 100%;}
+.optionbtn:hover {color: #89bfe5;}
+.btnchange {background-color: #d0d0d0;}
+.btnchange:hover {background-color: #72b5e5;}
+.text {font-size: 300%;}
+.historytext {font-size: 100%;}
+.method {font-size: 150%;}
+.keyinput1 {font-size: 150%;}
+.keyinput2 {font-size: 150%; color: #0000ff;}
+.historydiv {width: 404px; height: 368px; overflow-y: auto;}
+.calcdiv {width: 90%; margin-bottom: 50px; margin-left: auto; margin-right: auto; text-align: right;}
+.calcdivmethod {width: 90%; margin-top: 50px; margin-left: auto; margin-right: auto; text-align: left; overflow-y: auto; white-space: nowrap;}
+.impressumdiv {width: 60%; text-align: center; margin: auto;}
+.changelogdiv {width: 60%; text-align: left; margin-left: auto; margin-right: auto; margin-bottom: 50px;}
+</style></head><body><div class="calcdivmethod"><text id="method" class="method"></text><text id="keyinput1" class="keyinput1"></text><text id="keyinput2" class="keyinput2"></text></div><div class="calcdiv"><p id="calculation" class="text"></p></div>
+<center>
+<input type="button" id="buttonunit" onclick="functionunit()" value="DEG" class="optionbtn">
+<input type="button" id="buttoninput" onclick="functioninput()" value="German (QWERTZ)" class="optionbtn"><br>
+</center><table><tr><td><table style="border:0"><tr>
+<td>				<input type="button" id="button1" onclick="function1(),functionalways()" value="1" class="btntable btnf0">
+</td><td>			<input type="button" id="button2" onclick="function2(),functionalways()" value="2" class="btntable btnf0">
+</td><td>			<input type="button" id="button3" onclick="function3(),functionalways()" value="3" class="btntable btnf0">
+</td><td>			<input type="button" id="buttonplus" onclick="functionplus(),functionalways()" value="+" class="btntable btne0">
+</td><td>			<input type="button" id="buttonsquare" onclick="functionsquare(),functionalways()" value="²" class="btntable btnd0">
+</td><td>			<input type="button" id="buttonpower" onclick="functionpow(),functionalways()" value="^" class="btntable btnd0">
+</td><td>			<input type="button" id="buttonfloat" onclick="functionfloat(),functionalways()" value="*10^" class="btntable btnfloat">
+</td></tr><tr><td>	<input type="button" id="button4" onclick="function4(),functionalways()" value="4" class="btntable btnf0">
+</td><td>			<input type="button" id="button5" onclick="function5(),functionalways()" value="5" class="btntable btnf0">
+</td><td>			<input type="button" id="button6" onclick="function6(),functionalways()" value="6" class="btntable btnf0">
+</td><td>			<input type="button" id="buttonminus" onclick="functionminus(),functionalways()" value="-" class="btntable btne0">
+</td><td>			<input type="button" id="buttonsqrt" onclick="functionsqrt(),functionalways()" value="" class="btntable btnd0">
+</td><td>			<input type="button" id="buttonyroot" onclick="functionyroot(),functionalways()" value="" class="btntable btnd0">
+</td><td>			<input type="button" id="buttondel" onclick="functiondel()" value="DEL" class="btntable btndel">
+</td></tr><tr><td>	<input type="button" id="button7" onclick="function7(),functionalways()" value="7" class="btntable btnf0">
+</td><td>			<input type="button" id="button8" onclick="function8(),functionalways()" value="8" class="btntable btnf0">
+</td><td>			<input type="button" id="button9" onclick="function9(),functionalways()" value="9" class="btntable btnf0">
+</td><td>			<input type="button" id="buttonmultiply" onclick="functionmultiply(),functionalways()" value="*" class="btntable btne0">
+</td><td>			<input type="button" id="buttonpi" onclick="functionpi(),functionalways()" value="" class="btntable btnd0">
+</td><td>			<input type="button" id="buttonsin" onclick="functionsin(),functionalways()" value="sin" class="btntable btnd0">
+</td><td>			<input type="button" id="buttonclear" onclick="functionclear()" value="C" class="btntable btnclear">
+</td></tr><tr><td>	<input type="button" id="buttonmpoint" onclick="functionpoint(),functionalways()" value="." class="btntable btnf0">
+</td><td>			<input type="button" id="button0" onclick="function0(),functionalways()" value="0" class="btntable btnf0">
+</td><td>			<input type="button" id="buttonbracket" onclick="functionbracket(),functionalways()" value="()" class="btntable btne0">
+</td><td>			<input type="button" id="buttondivide" onclick="functiondivide(),functionalways()" value="/" class="btntable btne0">
+</td><td>			<input type="button" id="buttoncos" onclick="functioncos(),functionalways()" value="cos" class="btntable btnd0">
+</td><td>			<input type="button" id="buttontan" onclick="functiontan(),functionalways()" value="tan" class="btntable btnd0">
+</td><td>			<input type="button" id="buttonequal" onclick="functionequal(),functionalways()" value="=" class="btntable btnequal">
+</td></tr></table></td><td>
+<input type="button" id="buttonanswer" onclick="functionanswer(),functionalways()" value="Paste answer" class="chistorybutton">
+<input type="button" id="buttonclearhistory" onclick="functionclearhistory()" value="Clear history" class="chistorybuttonclear">
+<div class="historydiv"><p class="historytext" id="historyid"></p></div>
+</tr></table>
+<div class="impressumdiv"><p class="impressum" id="impressum"></p>
+<input type="button" id="changelogbutton" onclick="functionchange()" value="Show changelog" class="btnchange"></div>
+<div class="changelogdiv"><p class="impressum" id="changelogtext"></p></div>
+<script language="javascript" type="text/javascript">
+//About the calculator and some general stuff
+var cversion="1.2.5"; //Version of calculator
+var devstatus=3; //Status of calculator development (1=Beta, 2=Alpha, 3=Canary)
+var changelog=false; //To test if changelog is expanded
+var warned=false; //To test if alert was already shown (For experimental things)
+var warned2=true; //Same thing for second alert
+var chistory=""; //Calculation history text variable
+var unit=0; //0=DEG, 1=RAD, 2=GRAD
+var inputmethod=1;
+//Main variables for calculation
+var number="null"; //Number string variable
+var calc=0; //Solution of current calculation
+var savedcalc=0; //To save solution of current calculaton in case equals is clicked after an operation.
+var n=0; //Number after formatting string number + point as number
+var op=0; //1=+, 2=-
+var op2=1; //Counts how many times an operation button was clicked
+var opstart=false; //To test if an operation has actually begun. Also set to false after a bracket was started.
+var point=0; //Counts how many point digits were input
+var pointdivident="null"; //point number veriable
+var prefix=0; //To test if a prefix was input. Changes its value to 2 or -2 after a number is input additionally.
+var method="> "; //Main method
+var method2="> "; //Method after operation was input
+var method3="> "; //Method after point was input
+var mdop=0; //1=*, 2=/
+var mdcalc=0; //Solution of current multiplication and division
+var ans="null"; //Last answer
+var varinput=false; //Changed when variable such as Ans or Pi (but also closed bracket) was input.
+var bracketinput=false; //Changed when bracket is closed
+var bracketsave=0; //Saves last finished bracket calculation
+var bracket=0; //Counts how many brackets were opened
+var floating=false; //Works like prefix, true when floating point input is enabled.
+var floatingbase=0; //Number of base when inputting floating point.
+var invalidinput=false; //To show invalid input
+var invalid=0; //Bad expressions
+var calcend=0; //To test if a calculation got ended.
+var bracketopen=false; //To test if a bracket has been opened at least once.
+//Saves method for deleting
+var msdel1="> "; //5+|5
+var msdel2="> "; //5|+5
+//Following variables are all for each bracket opening to save the state before opening the bracket.
+var b1op=0;
+var b1calc=0;
+var b1mdop=0;
+var b1mdcalc=0;
+var b1prefix=0;
+var b1sqrt=false;
+var b1power=false;
+var b1yroot=false;
+var b1sin=false;
+var b1cos=false;
+var b1tan=false;
+var b1float=false;
+var b1n=0;
+var b2op=0;
+var b2calc=0;
+var b2mdop=0;
+var b2mdcalc=0;
+var b2prefix=0;
+var b2sqrt=false;
+var b2power=false;
+var b2yroot=false;
+var b2sin=false;
+var b2cos=false;
+var b2tan=false;
+var b2float=false;
+var b2n=0;
+var b3op=0;
+var b3calc=0;
+var b3mdop=0;
+var b3mdcalc=0;
+var b3prefix=0;
+var b3sqrt=false;
+var b3power=false;
+var b3yroot=false;
+var b3sin=false;
+var b3cos=false;
+var b3tan=false;
+var b3float=false;
+var b3n=0;
+var b4op=0;
+var b4calc=0;
+var b4mdop=0;
+var b4mdcalc=0;
+var b4prefix=0;
+var b4sqrt=false;
+var b4power=false;
+var b4yroot=false;
+var b4sin=false;
+var b4cos=false;
+var b4tan=false;
+var b4float=false;
+var b4n=0;
+var b5op=0;
+var b5calc=0;
+var b5mdop=0;
+var b5mdcalc=0;
+var b5prefix=0;
+var b5sqrt=false;
+var b5power=false;
+var b5yroot=false;
+var b5sin=false;
+var b5cos=false;
+var b5tan=false;
+var b5float=false;
+var b5n=0;
+var b6op=0;
+var b6calc=0;
+var b6mdop=0;
+var b6mdcalc=0;
+var b6prefix=0;
+var b6sqrt=false;
+var b6power=false;
+var b6yroot=false;
+var b6sin=false;
+var b6cos=false;
+var b6tan=false;
+var b6float=false;
+var b6n=0;
+var b7op=0;
+var b7calc=0;
+var b7mdop=0;
+var b7mdcalc=0;
+var b7prefix=0;
+var b7sqrt=false;
+var b7power=false;
+var b7yroot=false;
+var b7sin=false;
+var b7cos=false;
+var b7tan=false;
+var b7float=false;
+var b7n=0;
+//Keyboard input test variables
+var mkey1="";
+var mkey2="";
+var keytabswitch=-1;
+var keyinput=false; //To test if text has been input.
+var keytab=false;
+var keyshift=false;
+var keyctrl=false;
+var keyalt=false
+var keyreturn=false;
+var keybackspace=false;
+var keyescape=false
+var key0=false;
+var key1=false;
+var key2=false;
+var key3=false;
+var key4=false;
+var key5=false;
+var key6=false;
+var key7=false;
+var key8=false;
+var key9=false;
+var keyequal=false;
+var keyminus=false;
+var keybackslash=false;
+var keyperiod=false;
+var keya=false;
+var keyb=false;
+var keyc=false;
+var keyd=false;
+var keye=false;
+var keyf=false;
+var keyg=false;
+var keyh=false;
+var keyi=false;
+var keyj=false;
+var keyk=false;
+var keyl=false;
+var keym=false;
+var keyn=false;
+var keyo=false;
+var keyp=false;
+var keyq=false;
+var keyr=false;
+var keys=false;
+var keyt=false;
+var keyu=false;
+var keyv=false;
+var keyw=false;
+var keyx=false;
+var keyy=false;
+var keyz=false;
+var keyopenbracket=false;
+var keyclosebracket=false;
+var keyslash=false;
+var keycomma=false;
+var keysemicolon=false;
+var keygraveaccent=false;
+var keysinglequote=false;
+var keyspace=false;
+var keyleft=false;
+var keyright=false;
+var keyleftbackslash=false;
+//Actual program
+if (devstatus==0) {
+	var devstring=" ";
+} else if (devstatus==1) {
+	var devstring=" [Beta]";
+} else if (devstatus==2) {
+	var devstring=" [Alpha]";
+} else if (devstatus==3) {
+	var devstring=" [Canary]";
+}
+document.getElementById("method").innerHTML=method;
+document.getElementById("calculation").innerHTML=calc;
+document.getElementById("impressum").innerHTML="<strong>Calculator<br>by Lucia Leidl</strong><br>Version "+cversion+devstring+"<br>Design by Domi04151309<br><br>&copy 2017-2018";
+document.getElementById("historyid").innerHTML="<center>History is empty</center>";
+document.getElementById("buttonsqrt").value="\u221a";
+document.getElementById("buttonyroot").value="y\u221a";
+document.getElementById("buttonpi").value="\u03c0";
+function function1() {
+	if (varinput==false) {
+		if (point==0) {
+			if (number=="null") {
+				msdel2=method;
+				number="1";
+				method=method2+"1";
+			} else if (number=="-") {
+				msdel2=method;
+				number=number+"1";
+				method=method2+"1";
+			} else {
+				number=number+"1";
+				method=method+"1";
+			}
+			op2=0;
+			opstart=true;
+		} else if (point==1) {
+		} else {
+			if (pointdivident=="null") {
+				pointdivident="1";
+				method=method3+"1";
+			} else {
+				pointdivident=pointdivident+"1";
+				method=method+"1";
+			}
+			point--;
+			op2=0;
+			opstart=true;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		document.getElementById("method").innerHTML=method;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function function2() {
+	if (varinput==false) {
+		if (point==0) {
+			if (number=="null") {
+				msdel2=method;
+				number="2";
+				method=method2+"2";
+			} else if (number=="-") {
+				msdel2=method;
+				number=number+"2";
+				method=method2+"2";
+			} else {
+				number=number+"2";
+				method=method+"2";
+			}
+			op2=0;
+			opstart=true;
+		} else if (point==1) {
+		} else {
+			if (pointdivident=="null") {
+				pointdivident="2";
+				method=method3+"2";
+			} else {
+				pointdivident=pointdivident+"2";
+				method=method+"2";
+			}
+			point--;
+			op2=0;
+			opstart=true;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		document.getElementById("method").innerHTML=method;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function function3() {
+	if (varinput==false) {
+		if (point==0) {
+			if (number=="null") {
+				msdel2=method;
+				number="3";
+				method=method2+"3";
+			} else if (number=="-") {
+				msdel2=method;
+				number=number+"3";
+				method=method2+"3";
+			} else {
+				number=number+"3";
+				method=method+"3";
+			}
+			op2=0;
+			opstart=true;
+		} else {
+			if (pointdivident=="null") {
+				pointdivident="3";
+				method=method3+"3";
+			} else {
+				pointdivident=pointdivident+"3";
+				method=method+"3";
+			}
+			point--;
+			op2=0;
+			opstart=true;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		document.getElementById("method").innerHTML=method;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function function4() {
+	if (varinput==false) {
+		if (point==0) {
+			if (number=="null") {
+				msdel2=method;
+				number="4";
+				method=method2+"4";
+			} else if (number=="-") {
+				msdel2=method;
+				number=number+"4";
+				method=method2+"4";
+			} else {
+				number=number+"4";
+				method=method+"4";
+			}
+			op2=0;
+			opstart=true;
+		} else if (point==1) {
+		} else {
+			if (pointdivident=="null") {
+				pointdivident="4";
+				method=method3+"4";
+			} else {
+				pointdivident=pointdivident+"4";
+				method=method+"4";
+			}
+			point--;
+			op2=0;
+			opstart=true;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		document.getElementById("method").innerHTML=method;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function function5() {
+	if (varinput==false) {
+		if (point==0) {
+			if (number=="null") {
+				msdel2=method;
+				number="5";
+				method=method2+"5";
+			} else if (number=="-") {
+				msdel2=method;
+				number=number+"5";
+				method=method2+"5";
+			} else {
+				number=number+"5";
+				method=method+"5";
+			}
+			op2=0;
+			opstart=true;
+		} else if (point==1) {
+		} else {
+			if (pointdivident=="null") {
+				pointdivident="5";
+				method=method3+"5";
+			} else {
+				pointdivident=pointdivident+"5";
+				method=method+"5";
+			}
+			point--;
+			op2=0;
+			opstart=true;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		document.getElementById("method").innerHTML=method;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function function6() {
+	if (varinput==false) {
+		if (point==0) {
+			if (number=="null") {
+				msdel2=method;
+				number="6";
+				method=method2+"6";
+			} else if (number=="-") {
+				msdel2=method;
+				number=number+"6";
+				method=method2+"6";
+			} else {
+				number=number+"6";
+				method=method+"6";
+			}
+			op2=0;
+			opstart=true;
+		} else if (point==1) {
+		} else {
+			if (pointdivident=="null") {
+				pointdivident="6";
+				method=method3+"6";
+			} else {
+				pointdivident=pointdivident+"6";
+				method=method+"6";
+			}
+			point--;
+			op2=0;
+			opstart=true;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		document.getElementById("method").innerHTML=method;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function function7() {
+	if (varinput==false) {
+		if (point==0) {
+			if (number=="null") {
+				msdel2=method;
+				number="7";
+				method=method2+"7";
+			} else if (number=="-") {
+				msdel2=method;
+				number=number+"7";
+				method=method2+"7";
+			} else {
+				number=number+"7";
+				method=method+"7";
+			}
+			op2=0;
+			opstart=true;
+		} else if (point==1) {
+		} else {
+			if (pointdivident=="null") {
+				pointdivident="7";
+				method=method3+"7";
+			} else {
+				pointdivident=pointdivident+"7";
+				method=method+"7";
+			}
+			point--;
+			op2=0;
+			opstart=true;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		document.getElementById("method").innerHTML=method;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function function8() {
+	if (varinput==false) {
+		if (point==0) {
+			if (number=="null") {
+				msdel2=method;
+				number="8";
+				method=method2+"8";
+			} else if (number=="-") {
+				msdel2=method;
+				number=number+"8";
+				method=method2+"8";
+			} else {
+				number=number+"8";
+				method=method+"8";
+			}
+			op2=0;
+			opstart=true;
+		} else if (point==1) {
+		} else {
+			if (pointdivident=="null") {
+				pointdivident="8";
+				method=method3+"8";
+			} else {
+				pointdivident=pointdivident+"8";
+				method=method+"8";
+			}
+			point--;
+			op2=0;
+			opstart=true;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		document.getElementById("method").innerHTML=method;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function function9() {
+	if (varinput==false) {
+		if (point==0) {
+			if (number=="null") {
+				msdel2=method;
+				number="9";
+				method=method2+"9";
+			} else if (number=="-") {
+				msdel2=method;
+				number=number+"9";
+				method=method2+"9";
+			} else {
+				number=number+"9";
+				method=method+"9";
+			}
+			op2=0;
+			opstart=true;
+		} else if (point==1) {
+		} else {
+			if (pointdivident=="null") {
+				pointdivident="9";
+				method=method3+"9";
+			} else {
+				pointdivident=pointdivident+"9";
+				method=method+"9";
+			}
+			point--;
+			op2=0;
+			opstart=true;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		document.getElementById("method").innerHTML=method;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function function0() {
+	if (varinput==false) {
+		if (point==0) {
+			if (number=="null") {
+				msdel2=method;
+				number="0";
+				method=method2+"0";
+			} else if (number=="-") {
+				msdel2=method;
+				number=number+"0";
+				method=method2+"0";
+			} else {
+				number=number+"0";
+				method=method+"0";
+			}
+			op2=0;
+			opstart=true;
+		} else if (point==1) {
+		} else {
+			if (pointdivident=="null") {
+				pointdivident="0";
+				method=method3+"0";
+			} else {
+				pointdivident=pointdivident+"0";
+				method=method+"0";
+			}
+			point--;
+			op2=0;
+			opstart=true;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		document.getElementById("method").innerHTML=method;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function functionplus() {
+	if (point==15) {
+		point=0;
+		if (number=="0") {
+			method=method2+"0";
+		}
+	}
+	for (var pointloop=point;pointloop>0;pointloop--) {
+		pointdivident=pointdivident+"0";	
+	}
+	if (varinput==false) {
+		if (pointdivident!="null"&&prefix==-2) {
+			n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+		} else if (pointdivident!="null") {
+			n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+		} else {
+			n=parseInt(number);
+		}
+	}
+	if (floating==true) {
+		n=floatingbase*Math.pow(10,n);
+		floating=false;
+	}
+	if (prefix==2||prefix==-2) {
+		method=method+")";
+		document.getElementById("method").innerHTML=method;
+		prefix=0;
+	}
+	point=0;
+	pointdivident="null";
+	if (opstart==true) {
+		if (op2==0) {
+			if (mdop==0) {
+				if (op==0) {
+					calc=n;
+				} else if (op==1) {
+					calc=calc+n;
+				} else if (op==2) {
+					calc=calc-n;
+				}
+			} else if (mdop==1) {
+				if (op==0) {
+					calc=mdcalc*n;
+				} else if (op==1) {
+					calc=calc+mdcalc*n;
+				} else if (op==2) {
+					calc=calc-mdcalc*n;
+				}
+				mdcalc=0;
+				mdop=0;
+			} else if (mdop==2&&n!=0) {
+				if (op==0) {
+					calc=mdcalc/n;
+				} else if (op==1) {
+					calc=calc+mdcalc/n;
+				} else if (op==2) {
+					calc=calc-mdcalc/n;
+				}
+				mdcalc=0;
+				mdop=0;
+			} else if (mdop==2&&n==0) {
+				var error=true;
+			}
+			number="null";
+			point=0;
+			op=1;
+			method2=method+"+";
+			msdel1=method2;
+			prefix=0;
+			document.getElementById("method").innerHTML=method2;
+			document.getElementById("calculation").innerHTML=calc;
+			op2=1;
+		} else if (op2==1) {
+			method2=method2+"(+";
+			number="null";
+			prefix=1;
+			document.getElementById("method").innerHTML=method2;
+			op2=2;
+			bracketinput=false;
+		}
+	} else if (opstart==false) {
+		method2=method+"(+";
+		number="null";
+		prefix=1;
+		document.getElementById("method").innerHTML=method2;
+		bracketinput=false;
+	}
+	if (varinput==true&&op2==2) {
+		if (op==0) {
+			calc=mdcalc;
+		} else if (op==1) {
+			calc=calc+mdcalc;
+		} else if (op==2) {
+			calc=calc-mdcalc;
+		}
+		mdcalc=0;
+		mdop=0;
+		number="null";
+		point=0;
+		op=1;
+		method2=method+"+";
+		prefix=0;
+		document.getElementById("method").innerHTML=method2;
+		document.getElementById("calculation").innerHTML=calc;
+		op2=1;
+	}
+	savedcalc=calc;
+	varinput=false;
+	if (error==true) {
+		document.getElementById("calculation").innerHTML="Can't divide by zero";
+		document.getElementById("calculation").style.color="#bf0000";
+		invalid=2;
+		functionendcalc();
+	}
+}
+function functionminus() {
+	if (point==15) {
+		point=0;
+		if (number=="0") {
+			method=method2+"0";
+		}
+	}
+	for (var pointloop=point;pointloop>0;pointloop--) {
+		pointdivident=pointdivident+"0";	
+	}
+	if (varinput==false) {
+		if (pointdivident!="null"&&prefix==-2) {
+			n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+		} else if (pointdivident!="null") {
+			n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+		} else {
+			n=parseInt(number);
+		}
+	}
+	if (floating==true) {
+		n=floatingbase*Math.pow(10,n);
+		floating=false;
+	}
+	if (prefix==2||prefix==-2) {
+		method=method+")";
+		document.getElementById("method").innerHTML=method;
+		prefix=0;
+	}
+	point=0;
+	pointdivident="null";
+	if (opstart==true) {
+		if (op2==0) {
+			if (mdop==0) {
+				if (op==0) {
+					calc=n;
+				} else if (op==1) {
+					calc=calc+n;
+				} else if (op==2) {
+					calc=calc-n;
+				}
+			} else if (mdop==1) {
+				if (op==0) {
+					calc=mdcalc*n;
+				} else if (op==1) {
+					calc=calc+mdcalc*n;
+				} else if (op==2) {
+					calc=calc-mdcalc*n;
+				}
+				mdcalc=0;
+				mdop=0;
+			} else if (mdop==2&&n!=0) {
+				if (op==0) {
+					calc=mdcalc/n;
+				} else if (op==1) {
+					calc=calc+mdcalc/n;
+				} else if (op==2) {
+					calc=calc-mdcalc/n;
+				}
+				mdcalc=0;
+				mdop=0;
+			} else if (mdop==2&&n==0) {
+				var error=true;
+			}
+			number="null";
+			point=0;
+			op=2;
+			method2=method+"-";
+			msdel1=method2;
+			prefix=0;
+			document.getElementById("method").innerHTML=method2;
+			document.getElementById("calculation").innerHTML=calc;
+			op2=1;
+		} else if (op2==1) {
+			method2=method2+"(-";
+			number="-";
+			prefix=-1;
+			document.getElementById("method").innerHTML=method2;
+			op2=2;
+			bracketinput=false;
+		}
+	} else if (opstart==false) {
+		method2=method+"(-";
+		number="-";
+		prefix=-1;
+		document.getElementById("method").innerHTML=method2;
+		bracketinput=false;
+	}
+	if (varinput==true&&op2==2) {
+		if (op==0) {
+			calc=mdcalc;
+		} else if (op==1) {
+			calc=calc+mdcalc;
+		} else if (op==2) {
+			calc=calc-mdcalc;
+		}
+		mdcalc=0;
+		mdop=0;
+		number="null";
+		point=0;
+		op=2;
+		method2=method+"-";
+		prefix=0;
+		document.getElementById("method").innerHTML=method2;
+		document.getElementById("calculation").innerHTML=calc;
+		op2=1;
+	}
+	savedcalc=calc;
+	varinput=false;
+	if (error==true) {
+		document.getElementById("calculation").innerHTML="Can't divide by zero";
+		document.getElementById("calculation").style.color="#bf0000";
+		invalid=2;
+		functionendcalc();
+	}
+}
+function functionmultiply() {
+	if (point==15) {
+		point=0;
+		if (number=="0") {
+			method=method2+"0";
+		}
+	}
+	for (var pointloop=point;pointloop>0;pointloop--) {
+		pointdivident=pointdivident+"0";	
+	}
+	if (varinput==false) {
+		if (pointdivident!="null"&&prefix==-2) {
+			n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+		} else if (pointdivident!="null") {
+			n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+		} else {
+			n=parseInt(number);
+		}
+	}
+	if (prefix==2||prefix==-2) {
+		method=method+")";
+		document.getElementById("method").innerHTML=method;
+		prefix=0;
+	}
+	if (floating==true) {
+		n=floatingbase*Math.pow(10,n);
+		floating=false;
+	}
+	point=0;
+	pointdivident="null";
+	if (opstart==true) {
+		if (op2==0) {
+			if (mdop==0) {
+				mdcalc=n;
+			} else if (mdop==1) {
+				mdcalc=mdcalc*n;
+			} else if (mdop==2&&n!=0) {
+				mdcalc=mdcalc/n;
+			} else if (mdop==2&&n==0) {
+				var error=true;
+			}
+			number="null";
+			point=0;
+			mdop=1;
+			method2=method+"*";
+			msdel1=method2;
+			prefix=0;
+			document.getElementById("method").innerHTML=method2;
+			document.getElementById("calculation").innerHTML=mdcalc;
+			op2=1;
+		}
+	} else {
+		invalidinput=true;
+	}
+	if (varinput==true&&op2==2) {
+		number="null";
+		point=0;
+		mdop=1;
+		method2=method+"*";
+		prefix=0;
+		document.getElementById("method").innerHTML=method2;
+		document.getElementById("calculation").innerHTML=mdcalc;
+		op2=1;
+	}
+	if (op==0) {
+		savedcalc=mdcalc;
+	} else if (op==1) {
+		savedcalc=calc+mdcalc;
+	} else if (op==2) {
+		savedcalc=calc-mdcalc;
+	}
+	varinput=false;
+	if (error==true) {
+		document.getElementById("calculation").innerHTML="Can't divide by zero";
+		document.getElementById("calculation").style.color="#bf0000";
+		invalid=2;
+		functionendcalc();
+	}
+}
+function functiondivide() {
+	if (point==15) {
+		point=0;
+		if (number=="0") {
+			method=method2+"0";
+		}
+	}
+	for (var pointloop=point;pointloop>0;pointloop--) {
+		pointdivident=pointdivident+"0";	
+	}
+	if (varinput==false) {
+		if (pointdivident!="null"&&prefix==-2) {
+			n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+		} else if (pointdivident!="null") {
+			n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+		} else {
+			n=parseInt(number);
+		}
+	}
+	if (floating==true) {
+		n=floatingbase*Math.pow(10,n);
+		floating=false;
+	}
+	if (prefix==2||prefix==-2) {
+		method=method+")";
+		document.getElementById("method").innerHTML=method;
+		prefix=0;
+	}
+	point=0;
+	pointdivident="null";
+	if (opstart==true) {
+		if (op2==0) {
+			if (mdop==0) {
+				mdcalc=n;
+			} else if (mdop==1) {
+				mdcalc=mdcalc*n;
+			} else if (mdop==2&&n!=0) {
+				mdcalc=mdcalc/n;
+			} else if (mdop==2&&n==0) {
+				var error=true;
+			}
+			number="null";
+			point=0;
+			mdop=2;
+			method2=method+"/";
+			msdel1=method2;
+			prefix=0;
+			document.getElementById("method").innerHTML=method2;
+			document.getElementById("calculation").innerHTML=mdcalc;
+			op2=1;
+		}
+	} else {
+		invalidinput=true;
+	}
+	if (varinput==true&&op2==2) {
+		number="null";
+		point=0;
+		mdop=2;
+		method2=method+"/";
+		prefix=0;
+		document.getElementById("method").innerHTML=method2;
+		document.getElementById("calculation").innerHTML=mdcalc;
+		op2=1;
+	}
+	if (op==0) {
+		savedcalc=mdcalc;
+	} else if (op==1) {
+		savedcalc=calc+mdcalc;
+	} else if (op==2) {
+		savedcalc=calc-mdcalc;
+	}
+	varinput=false;
+	if (error==true) {
+		document.getElementById("calculation").innerHTML="Can't divide by zero";
+		document.getElementById("calculation").style.color="#bf0000";
+		invalid=2;
+		functionendcalc();
+	}
+}
+function functionequal() {
+	if (calcend==0) {
+		if (opstart==false&&bracketopen==true) {
+			document.getElementById("calculation").innerHTML="Can't calculate empty brackets";
+			document.getElementById("calculation").style.color="#bf0000";
+			invalid=2;
+			functionendcalc();
+		} else {
+			for (var bracketloop=bracket;bracketloop>0;bracketloop--) {
+				if (point==15) {
+					point=0;
+					if (number=="0") {
+						method=method2+"0";
+					}
+				}
+				for (var pointloop=point;pointloop>0;pointloop--) {
+					pointdivident=pointdivident+"0";	
+				}
+				if (floating==true) {
+					n=floatingbase*Math.pow(10,n);
+					floating=false;
+					varinput=true;
+				}
+				if (varinput==false) {
+					if (pointdivident!="null"&&prefix==-2) {
+						n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+					} else if (pointdivident!="null") {
+						n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+					} else {
+						n=parseInt(number);
+					}
+				}
+				if (floating==true) {
+					n=floatingbase*Math.pow(10,n);
+					floating=false;
+				}
+				if (prefix==2||prefix==-2) {
+					method=method+")";
+					document.getElementById("method").innerHTML=method;
+					prefix=0;
+				}
+				point=0;
+				pointdivident="null";
+				if (opstart==true) {
+					if (op2==0) {
+						if (mdop==0) {
+							if (op==0) {
+								calc=n;
+							} else if (op==1) {
+								calc=calc+n;
+							} else if (op==2) {
+								calc=calc-n;
+							}
+						} else if (mdop==1) {
+							if (op==0) {
+								calc=mdcalc*n;
+							} else if (op==1) {
+								calc=calc+mdcalc*n;
+							} else if (op==2) {
+								calc=calc-mdcalc*n;
+							}
+							mdcalc=0;
+							mdop=0;
+						} else if (mdop==2&&n!=0) {
+							if (op==0) {
+								calc=mdcalc/n;
+							} else if (op==1) {
+								calc=calc+mdcalc/n;
+							} else if (op==2) {
+								calc=calc-mdcalc/n;
+							}
+							mdcalc=0;
+							mdop=0;
+						} else if (mdop==2&&n==0) {
+							var error=true;
+						}
+					} else {
+						calc=savedcalc;
+					}
+					number="null";
+					op=0;
+					op2=0;
+					point=0;
+					pointdivident="null";
+					prefix=0;
+					method=method+")";
+					method2=method;
+				}
+				bracketsave=calc;
+				if (bracket==7) {
+					op=b7op;
+					calc=b7calc;
+					mdop=b7mdop;
+					mdcalc=b7mdcalc;
+					prefix=b7prefix;
+					var bsqrt=b7sqrt;
+					var bpower=b7power;
+					var byroot=b7yroot;
+					var bsin=b7sin;
+					var bcos=b7cos;
+					var btan=b7tan;
+					var bxn=b7n;
+					b7sqrt=false;
+					b7power=false;
+					b7yroot=false;
+					b7sin=false;
+					b7cos=false;
+					b7tan=false;
+				} else if (bracket==6) {
+					op=b6op;
+					calc=b6calc;
+					mdop=b6mdop;
+					mdcalc=b6mdcalc;
+					prefix=b6prefix;
+					var bsqrt=b6sqrt;
+					var bpower=b6power;
+					var byroot=b6yroot;
+					var bsin=b6sin;
+					var bcos=b6cos;
+					var btan=b6tan;
+					var bxn=b6n;
+					b6sqrt=false;
+					b6power=false;
+					b6yroot=false;
+					b6sin=false;
+					b6cos=false;
+					b6tan=false;
+				} else if (bracket==5) {
+					op=b5op;
+					calc=b5calc;
+					mdop=b5mdop;
+					mdcalc=b5mdcalc;
+					prefix=b5prefix;
+					var bsqrt=b5sqrt;
+					var bpower=b5power;
+					var byroot=b5yroot;
+					var bsin=b5sin;
+					var bcos=b5cos;
+					var btan=b5tan;
+					var bxn=b5n;
+					b5sqrt=false;
+					b5power=false;
+					b5yroot=false;
+					b5sin=false;
+					b5cos=false;
+					b5tan=false;
+				} else if (bracket==4) {
+					op=b4op;
+					calc=b4calc;
+					mdop=b4mdop;
+					mdcalc=b4mdcalc;
+					prefix=b4prefix;
+					var bsqrt=b4sqrt;
+					var bpower=b4power;
+					var byroot=b4yroot;
+					var bsin=b4sin;
+					var bcos=b4cos;
+					var btan=b4tan;
+					var bxn=b4n;
+					b4sqrt=false;
+					b4power=false;
+					b4yroot=false;
+					b4sin=false;
+					b4cos=false;
+					b4tan=false;
+				} else if (bracket==3) {
+					op=b3op;
+					calc=b3calc;
+					mdop=b3mdop;
+					mdcalc=b3mdcalc;
+					prefix=b3prefix;
+					var bsqrt=b3sqrt;
+					var bpower=b3power;
+					var byroot=b3yroot;
+					var bsin=b3sin;
+					var bcos=b3cos;
+					var btan=b3tan;
+					var bxn=b3n;
+					b3sqrt=false;
+					b3power=false;
+					b3yroot=false;
+					b3sin=false;
+					b3cos=false;
+					b3tan=false;
+				} else if (bracket==2) {
+					op=b2op;
+					calc=b2calc;
+					mdop=b2mdop;
+					mdcalc=b2mdcalc;
+					prefix=b2prefix;
+					var bsqrt=b2sqrt;
+					var bpower=b2power;
+					var byroot=b2yroot;
+					var bsin=b2sin;
+					var bcos=b2cos;
+					var btan=b2tan;
+					var bxn=b2n;
+					b2sqrt=false;
+					b2power=false;
+					b2yroot=false;
+					b2sin=false;
+					b2cos=false;
+					b2tan=false;
+				} else if (bracket==1) {
+					op=b1op;
+					calc=b1calc;
+					mdop=b1mdop;
+					mdcalc=b1mdcalc;
+					prefix=b1prefix;
+					var bsqrt=b1sqrt;
+					var bpower=b1power;
+					var byroot=b1yroot;
+					var bsin=b1sin;
+					var bcos=b1cos;
+					var btan=b1tan;
+					var bxn=b1n;
+					b1sqrt=false;
+					b1power=false;
+					b1yroot=false;
+					b1sin=false;
+					b1cos=false;
+					b1tan=false;
+				}
+				if (bsqrt==true) {
+					if (bracketsave>=0) {
+						bracketsave=Math.sqrt(bracketsave);
+					} else {
+						var error2=true;
+					}
+				} else if (bsin==true) {
+					if (unit==0) {
+						bracketsave=Math.sin(bracketsave*Math.PI/180);
+					} else if (unit==1) {
+						bracketsave=Math.sin(bracketsave);
+					} else if (unit==2) {
+						bracketsave=Math.sin(bracketsave*Math.PI/200);
+					}
+				} else if (bcos==true) {
+					if (unit==0) {
+						bracketsave=Math.cos(bracketsave*Math.PI/180);
+					} else if (unit==1) {
+						bracketsave=Math.cos(bracketsave);
+					} else if (unit==2) {
+						bracketsave=Math.cos(bracketsave*Math.PI/200);
+					}
+				} else if (btan==true) {
+					if (unit==0) {
+						bracketsave=Math.tan(bracketsave*Math.PI/180);
+					} else if (unit==1) {
+						bracketsave=Math.tan(bracketsave);
+					} else if (unit==2) {
+						bracketsave=Math.tan(bracketsave*Math.PI/200);
+					}
+				} else if (bpower==true) {
+					if (bxn<0&&bracketsave>-1&&bracketsave<1) {
+						error2=true;
+					} else {
+						bracketsave=Math.pow(bxn,bracketsave);
+					}
+				} else if (byroot==true) {
+					if (bxn<0) {
+						error2=true;
+					} else {
+						bracketsave=Math.pow(bxn,1/bracketsave);
+					}
+				} else if (floating==true) {
+					n=bxn;
+					floating=false;
+				}
+				if (prefix==1) {
+					prefix=2;
+				} else if (prefix==-1) {
+					bracketsave=bracketsave*-1;
+					prefix=-2;
+				}
+				n=bracketsave
+				document.getElementById("calculation").innerHTML=n;
+				op2=0;
+				opstart=true;
+				document.getElementById("method").innerHTML=method;
+				bracket--;
+				varinput=true;
+				bracketinput=true;
+				if (error2==true&&error!=true) {
+					document.getElementById("calculation").innerHTML="No solution";
+					document.getElementById("calculation").style.color="#bf0000";
+					invalid=2;
+					functionendcalc();
+				}
+				if (error==true) {
+					document.getElementById("calculation").innerHTML="Can't divide by zero";
+					document.getElementById("calculation").style.color="#bf0000";
+					invalid=2;
+					functionendcalc();
+				}
+			}
+			if (point==15) {
+				point=0;
+				if (number=="0") {
+					method=method2+"0";
+				}
+			}
+			for (var pointloop=point;pointloop>0;pointloop--) {
+				pointdivident=pointdivident+"0";	
+			}
+			if (varinput==false) {
+				if (pointdivident!="null"&&prefix==-2) {
+					n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+				} else if (pointdivident!="null") {
+					n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+				} else {
+					n=parseInt(number);
+				}
+			}
+			if (floating==true) {
+				n=floatingbase*Math.pow(10,n);
+				floating=false;
+			}
+			if (prefix==2||prefix==-2) {
+				method=method+")";
+				document.getElementById("method").innerHTML=method;
+				prefix=0;
+			}
+			point=0;
+			pointdivident="null";
+			if (opstart==true) {
+				if (op2==0) {
+					if (mdop==0) {
+						if (op==0) {
+							calc=n;
+						} else if (op==1) {
+							calc=calc+n;
+						} else if (op==2) {
+							calc=calc-n;
+						}
+					} else if (mdop==1) {
+						if (op==0) {
+							calc=mdcalc*n;
+						} else if (op==1) {
+							calc=calc+mdcalc*n;
+						} else if (op==2) {
+							calc=calc-mdcalc*n;
+						}
+						mdcalc=0;
+						mdop=0;
+					} else if (mdop==2&&n!=0) {
+						if (op==0) {
+							calc=mdcalc/n;
+						} else if (op==1) {
+							calc=calc+mdcalc/n;
+						} else if (op==2) {
+							calc=calc-mdcalc/n;
+						}
+						mdcalc=0;
+						mdop=0;
+					} else if (mdop==2&&n==0) {
+						var error=true;
+					}
+					if (error==true) {
+						document.getElementById("calculation").innerHTML="Can't divide by zero";
+						document.getElementById("calculation").style.color="#bf0000";
+						invalid=2;
+						functionendcalc();
+					}
+				} else {
+					calc=savedcalc;
+				}
+				if (error!=true) {
+					document.getElementById("calculation").innerHTML=calc;
+					chistory=method+"<br>= "+calc+"<br><br>"+chistory
+					document.getElementById("historyid").innerHTML=chistory;
+					functionendcalc();
+				}
+			}
+		}
+	}
+	calcend=2;
+}
+function functionclear() {
+	number="null";
+	calc=0;
+	n=0;
+	op=0;
+	op2=1;
+	opstart=false;
+	point=0;
+	pointdivident="null";
+	prefix=0;
+	method="> ";
+	method2="> "
+	method3="> "
+	msdel1="> "
+	mdop=0;
+	mdcalc=0;
+	savedcalc=0;
+	varinput=false;
+	bracketinput=false;
+	bracketsave=0;
+	bracket=0;
+	b7sqrt=false;
+	b7power=false;
+	b7yroot=false;
+	b7sin=false;
+	b7cos=false;
+	b7tan=false;
+	b6sqrt=false;
+	b6power=false;
+	b6yroot=false;
+	b6sin=false;
+	b6cos=false;
+	b6tan=false;
+	b5sqrt=false;
+	b5power=false;
+	b5yroot=false;
+	b5sin=false;
+	b5cos=false;
+	b5tan=false;
+	b4sqrt=false;
+	b4power=false;
+	b4yroot=false;
+	b4sin=false;
+	b4cos=false;
+	b4tan=false;
+	b3sqrt=false;
+	b3power=false;
+	b3yroot=false;
+	b3sin=false;
+	b3cos=false;
+	b3tan=false;
+	b2sqrt=false;
+	b2power=false;
+	b2yroot=false;
+	b2sin=false;
+	b2cos=false;
+	b2tan=false;
+	b1sqrt=false;
+	b1power=false;
+	b1yroot=false;
+	b1sin=false;
+	b1cos=false;
+	b1tan=false;
+	document.getElementById("method").innerHTML=method;
+	document.getElementById("calculation").innerHTML=calc;
+	mkey1="";
+	mkey2="";
+	document.getElementById("keyinput1").innerHTML=mkey1;
+	document.getElementById("keyinput2").innerHTML=mkey2;
+	keyinput=false;
+	keytabswitch=-1;
+	bracketopen=false;
+	document.getElementById("calculation").style.color="#000000";
+}
+function functionpoint() {
+	if (varinput==false) {
+		if (warned==false) {
+			alert("IMPORTANT:\nRight now, input of points is very experimental! It may give incorrect solutions in many cases due to how calculating in decimal numbers works for the computer. If you need propper solutions, you can use divisions instead.\nIt is being worked on a fix! :)");
+			warned=true;
+		}
+		if (point==0) {
+			point=15;
+			if (number=="null"||number=="-") {
+				number="0";
+				method3=method2+"0.";
+			} else {
+				method3=method+".";
+			}
+			document.getElementById("method").innerHTML=method3;
+			pointdivident="null"
+		}
+		op2=0;
+		opstart=true;
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+	} else {
+		invalidinput=true;
+	}
+}
+function functionclearhistory() {
+	chistory=""
+	ans="null"
+	document.getElementById("historyid").innerHTML="<center>History is empty</center>";
+}
+function functionanswer() {
+	if (ans!="null") {
+		if (point==15) {
+			point=0;
+		}
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		if (floating==true) {
+			n=floatingbase*Math.pow(10,n);
+			floating=false;
+		}
+		point=0;
+		pointdivident="null";
+		if (number!="null"&&number!="-"||varinput==true) {
+			msdel2=method;
+			if (mdop==0) {
+				mdcalc=n;
+			} else if (mdop==1) {
+				mdcalc=mdcalc*n;
+			} else if (mdop==2) {
+				mdcalc=mdcalc/n;
+			}
+			point=0;
+			method=method+"*Ans";
+			prefix=0;
+			document.getElementById("calculation").innerHTML=mdcalc;
+			op2=0;
+			mdop=1;
+			n=ans;
+			if (op==0) {
+				savedcalc=mdcalc;
+			} else if (op==1) {
+				savedcalc=calc+mdcalc;
+			} else if (op==2) {
+				savedcalc=calc-mdcalc;
+			}
+		} else if (number=="null") {
+			msdel2=method;
+			n=ans;
+			method=method2+"Ans";
+			op2=0;
+		} else if (number=="-") {
+			msdel2=method;
+			n=number+ans;
+			method=method2+"Ans";
+			op2=0;
+		}
+		opstart=true;
+		document.getElementById("method").innerHTML=method;
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			prefix=-2;
+		}
+		varinput=true;
+		bracketinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function functionbracket() {
+	if (prefix==2||prefix==-2) {
+		functionbracketclose();
+	} else if (number=="null"&&bracket!=7&&varinput==false||number=="-"&&bracket!=7&&varinput==false) {
+		functionbracketopen();
+	} else if (bracket!=0&&opstart==true) {
+		functionbracketclose();
+	} else {
+		invalidinput=true;
+	}
+}
+function functionbracketclose() {
+	if (prefix==2||prefix==-2) {
+		if (point==15) {
+			point=0;
+			if (number=="0") {
+				method=method2+"0";
+			}
+		}
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		if (floating==true) {
+			n=floatingbase*Math.pow(10,n);
+			floating=false;
+		}
+		method=method+")";
+		document.getElementById("method").innerHTML=method;
+		prefix=0;
+		point=0;
+		pointdivident="null";
+		varinput=true;
+	} else if (number=="null"&&bracket!=7&&varinput==false&&opstart==true||number=="-"&&bracket!=7&&varinput==false&&opstart==true) {
+	} else if (bracket!=0&&opstart==true&&bracket!=0) {
+		if (point==15) {
+			point=0;
+			if (number=="0") {
+				method=method2+"0";
+			}
+		}
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		if (floating==true) {
+			n=floatingbase*Math.pow(10,n);
+			floating=false;
+		}
+		if (prefix==2||prefix==-2) {
+			method=method+")";
+			document.getElementById("method").innerHTML=method;
+			prefix=0;
+		}
+		point=0;
+		pointdivident="null";
+		if (opstart==true) {
+			if (op2==0) {
+				if (mdop==0) {
+					if (op==0) {
+						calc=n;
+					} else if (op==1) {
+						calc=calc+n;
+					} else if (op==2) {
+						calc=calc-n;
+					}
+				} else if (mdop==1) {
+					if (op==0) {
+						calc=mdcalc*n;
+					} else if (op==1) {
+						calc=calc+mdcalc*n;
+					} else if (op==2) {
+						calc=calc-mdcalc*n;
+					}
+					mdcalc=0;
+					mdop=0;
+				} else if (mdop==2&&n!=0) {
+					if (op==0) {
+						calc=mdcalc/n;
+					} else if (op==1) {
+						calc=calc+mdcalc/n;
+					} else if (op==2) {
+						calc=calc-mdcalc/n;
+					}
+					mdcalc=0;
+					mdop=0;
+				} else if (mdop==2&&n==0) {
+					var error=true;
+				}
+			} else {
+				calc=savedcalc;
+			}
+			number="null";
+			op=0;
+			op2=0;
+			point=0;
+			pointdivident="null";
+			prefix=0;
+			method=method+")";
+			method2=method;
+			msdel1=method2;
+		}
+		bracketsave=calc;
+		if (bracket==7) {
+			op=b7op;
+			calc=b7calc;
+			mdop=b7mdop;
+			mdcalc=b7mdcalc;
+			prefix=b7prefix;
+			var bsqrt=b7sqrt;
+			var bpower=b7power;
+			var byroot=b7yroot;
+			var bsin=b7sin;
+			var bcos=b7cos;
+			var btan=b7tan;
+			var bxn=b7n;
+			b7sqrt=false;
+			b7power=false;
+			b7yroot=false;
+			b7sin=false;
+			b7cos=false;
+			b7tan=false;
+		} else if (bracket==6) {
+			op=b6op;
+			calc=b6calc;
+			mdop=b6mdop;
+			mdcalc=b6mdcalc;
+			prefix=b6prefix;
+			var bsqrt=b6sqrt;
+			var bpower=b6power;
+			var byroot=b6yroot;
+			var bsin=b6sin;
+			var bcos=b6cos;
+			var btan=b6tan;
+			var bxn=b6n;
+			b6sqrt=false;
+			b6power=false;
+			b6yroot=false;
+			b6sin=false;
+			b6cos=false;
+			b6tan=false;
+		} else if (bracket==5) {
+			op=b5op;
+			calc=b5calc;
+			mdop=b5mdop;
+			mdcalc=b5mdcalc;
+			prefix=b5prefix;
+			var bsqrt=b5sqrt;
+			var bpower=b5power;
+			var byroot=b5yroot;
+			var bsin=b5sin;
+			var bcos=b5cos;
+			var btan=b5tan;
+			var bxn=b5n;
+			b5sqrt=false;
+			b5power=false;
+			b5yroot=false;
+			b5sin=false;
+			b5cos=false;
+			b5tan=false;
+		} else if (bracket==4) {
+			op=b4op;
+			calc=b4calc;
+			mdop=b4mdop;
+			mdcalc=b4mdcalc;
+			prefix=b4prefix;
+			var bsqrt=b4sqrt;
+			var bpower=b4power;
+			var byroot=b4yroot;
+			var bsin=b4sin;
+			var bcos=b4cos;
+			var btan=b4tan;
+			var bxn=b4n;
+			b4sqrt=false;
+			b4power=false;
+			b4yroot=false;
+			b4sin=false;
+			b4cos=false;
+			b4tan=false;
+		} else if (bracket==3) {
+			op=b3op;
+			calc=b3calc;
+			mdop=b3mdop;
+			mdcalc=b3mdcalc;
+			prefix=b3prefix;
+			var bsqrt=b3sqrt;
+			var bpower=b3power;
+			var byroot=b3yroot;
+			var bsin=b3sin;
+			var bcos=b3cos;
+			var btan=b3tan;
+			var bxn=b3n;
+			b3sqrt=false;
+			b3power=false;
+			b3yroot=false;
+			b3sin=false;
+			b3cos=false;
+			b3tan=false;
+		} else if (bracket==2) {
+			op=b2op;
+			calc=b2calc;
+			mdop=b2mdop;
+			mdcalc=b2mdcalc;
+			prefix=b2prefix;
+			var bsqrt=b2sqrt;
+			var bpower=b2power;
+			var byroot=b2yroot;
+			var bsin=b2sin;
+			var bcos=b2cos;
+			var btan=b2tan;
+			var bxn=b2n;
+			b2sqrt=false;
+			b2power=false;
+			b2yroot=false;
+			b2sin=false;
+			b2cos=false;
+			b2tan=false;
+		} else if (bracket==1) {
+			op=b1op;
+			calc=b1calc;
+			mdop=b1mdop;
+			mdcalc=b1mdcalc;
+			prefix=b1prefix;
+			var bsqrt=b1sqrt;
+			var bpower=b1power;
+			var byroot=b1yroot;
+			var bsin=b1sin;
+			var bcos=b1cos;
+			var btan=b1tan;
+			var bxn=b1n;
+			b1sqrt=false;
+			b1power=false;
+			b1yroot=false;
+			b1sin=false;
+			b1cos=false;
+			b1tan=false;
+		}
+		if (bsqrt==true) {
+			if (bracketsave>=0) {
+				bracketsave=Math.sqrt(bracketsave);
+			} else {
+				var error2=true;
+			}
+		} else if (bsin==true) {
+			if (unit==0) {
+				bracketsave=Math.sin(bracketsave*Math.PI/180);
+			} else if (unit==1) {
+				bracketsave=Math.sin(bracketsave);
+			} else if (unit==2) {
+				bracketsave=Math.sin(bracketsave*Math.PI/200);
+			}
+		} else if (bcos==true) {
+			if (unit==0) {
+				bracketsave=Math.cos(bracketsave*Math.PI/180);
+			} else if (unit==1) {
+				bracketsave=Math.cos(bracketsave);
+			} else if (unit==2) {
+				bracketsave=Math.cos(bracketsave*Math.PI/200);
+			}
+		} else if (btan==true) {
+			if (unit==0) {
+				bracketsave=Math.tan(bracketsave*Math.PI/180);
+			} else if (unit==1) {
+				bracketsave=Math.tan(bracketsave);
+			} else if (unit==2) {
+				bracketsave=Math.tan(bracketsave*Math.PI/200);
+			}
+		} else if (bpower==true) {
+			if (bxn<0&&bracketsave>-1&&bracketsave<1) {
+				error2=true;
+			} else {
+				bracketsave=Math.pow(bxn,bracketsave);
+			}
+		} else if (byroot==true) {
+			if (bxn<0) {
+				error2=true;
+			} else {
+				bracketsave=Math.pow(bxn,1/bracketsave);
+			}
+		} else if (floating==true) {
+			n=bxn;
+			floating=false;
+		}
+		if (prefix==1) {
+			prefix=2;
+		} else if (prefix==-1) {
+			bracketsave=bracketsave*-1;
+			prefix=-2;
+		}
+		n=bracketsave
+		document.getElementById("calculation").innerHTML=n;
+		op2=0;
+		opstart=true;
+		document.getElementById("method").innerHTML=method;
+		bracket--;
+		varinput=true;
+		bracketinput=true;
+		if (error2==true&&error!=true) {
+			document.getElementById("calculation").innerHTML="No solution";
+			document.getElementById("calculation").style.color="#bf0000";
+			invalid=2;
+			functionendcalc();
+		}
+		if (error==true) {
+			document.getElementById("calculation").innerHTML="Can't divide by zero";
+			document.getElementById("calculation").style.color="#bf0000";
+			invalid=2;
+			functionendcalc();
+		}
+	} else {
+		invalidinput=true;
+	}
+}
+function functionbracketopen() {
+	if (prefix==2||prefix==-2) {
+	} else if (number=="null"&&bracket!=7&&varinput==false||number=="-"&&bracket!=7&&varinput==false) {
+		if (prefix==1||prefix==-1) {
+			method=method2+"(";
+		} else if (opstart==true) {
+			method=method2+"(";
+		} else {
+			method=method+"(";
+		}
+		bxn=n;
+		if (bracket==0) {
+			b1op=op;
+			b1calc=calc;
+			b1mdop=mdop;
+			b1mdcalc=mdcalc;
+			b1prefix=prefix;
+			b1n=bxn;
+		} else if (bracket==1) {
+			b2op=op;
+			b2calc=calc;
+			b2mdop=mdop;
+			b2mdcalc=mdcalc;
+			b2prefix=prefix;
+			b2n=bxn;
+		} else if (bracket==2) {
+			b3op=op;
+			b3calc=calc;
+			b3mdop=mdop;
+			b3mdcalc=mdcalc;
+			b3prefix=prefix;
+			b3n=bxn;
+		} else if (bracket==3) {
+			b4op=op;
+			b4calc=calc;
+			b4mdop=mdop;
+			b4mdcalc=mdcalc;
+			b4prefix=prefix;
+			b4n=bxn;
+		} else if (bracket==4) {
+			b5op=op;
+			b5calc=calc;
+			b5mdop=mdop;
+			b5mdcalc=mdcalc;
+			b5prefix=prefix;
+			b5n=bxn;
+		} else if (bracket==5) {
+			b6op=op;
+			b6calc=calc;
+			b6mdop=mdop;
+			b6mdcalc=mdcalc;
+			b6prefix=prefix;
+			b6n=bxn;
+		} else if (bracket==6) {
+			b7op=op;
+			b7calc=calc;
+			b7mdop=mdop;
+			b7mdcalc=mdcalc;
+			b7prefix=prefix;
+			b7n=bxn;
+		}
+		number="null";
+		prefix=0;
+		method2=method;
+		msdel1=method2;
+		op=0;
+		mdop=0;
+		op2=0;
+		opstart=false;
+		bracketopen=true;
+		bracket++;
+		document.getElementById("method").innerHTML=method;
+	} else {
+		invalidinput=true;
+	}
+}
+function functionpi() {
+	if (point==15) {
+		point=0;
+	}
+	for (var pointloop=point;pointloop>0;pointloop--) {
+		pointdivident=pointdivident+"0";	
+	}
+	if (varinput==false) {
+		if (pointdivident!="null"&&prefix==-2) {
+			n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+		} else if (pointdivident!="null") {
+			n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+		} else {
+			n=parseInt(number);
+		}
+	}
+	if (floating==true) {
+		n=floatingbase*Math.pow(10,n);
+		floating=false;
+	}
+	point=0;
+	pointdivident="null";
+	if (number!="null"&&number!="-"||varinput==true) {
+		msdel2=method;
+		if (mdop==0) {
+			mdcalc=n;
+		} else if (mdop==1) {
+			mdcalc=mdcalc*n;
+		} else if (mdop==2) {
+			mdcalc=mdcalc/n;
+		}
+		point=0;
+		method=method+"*\u03c0";
+		prefix=0;
+		document.getElementById("calculation").innerHTML=mdcalc;
+		op2=0;
+		mdop=1;
+		n=Math.PI;
+		if (op==0) {
+			savedcalc=mdcalc;
+		} else if (op==1) {
+			savedcalc=calc+mdcalc;
+		} else if (op==2) {
+			savedcalc=calc-mdcalc;
+		}
+	} else if (number=="null") {
+		msdel2=method;
+		n=Math.PI;
+		method=method2+"\u03c0";
+		op2=0;
+	} else if (number=="-") {
+		msdel2=method;
+		n=number+Math.PI;
+		method=method2+"\u03c0";
+		op2=0;
+	}
+	opstart=true;
+	document.getElementById("method").innerHTML=method;
+	if (prefix==1) {
+		prefix=2;
+	} else if (prefix==-1) {
+		prefix=-2;
+	}
+	varinput=true;
+	bracketinput=false;
+}
+function functionsquare() {
+	if (bracketinput==false&&number!="null"||bracketinput==false&&varinput==true) {
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		n=n*n;
+		varinput=false;
+		method=method+"^2";
+		op2=0;
+		opstart=true;
+		document.getElementById("method").innerHTML=method;
+		document.getElementById("calculation").innerHTML=n;
+		varinput=true;
+	} else if (bracketinput==true) {
+		n=bracketsave*bracketsave;
+		method=method+"^2";
+		op2=0;
+		opstart=true;
+		document.getElementById("method").innerHTML=method;
+		document.getElementById("calculation").innerHTML=n;
+		varinput=true;
+	} else {
+		invalidinput=true;
+	}
+}
+function functionsqrt() {
+	if (bracket!=7) {
+		if (point==15) {
+			point=0;
+		}
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		if (floating==true) {
+			n=floatingbase*Math.pow(10,n);
+			floating=false;
+		}
+		point=0;
+		pointdivident="null";
+		if (number!="null"&&number!="-"||varinput==true) {
+			if (mdop==0) {
+				mdcalc=n;
+			} else if (mdop==1) {
+				mdcalc=mdcalc*n;
+			} else if (mdop==2) {
+				mdcalc=mdcalc/n;
+			}
+			point=0;
+			method=method+"*\u221a(";
+			prefix=0;
+			document.getElementById("calculation").innerHTML=mdcalc;
+			op2=0;
+			mdop=1;
+			if (op==0) {
+				savedcalc=mdcalc;
+			} else if (op==1) {
+				savedcalc=calc+mdcalc;
+			} else if (op==2) {
+				savedcalc=calc-mdcalc;
+			}
+		} else if (number=="null") {
+			method=method2+"\u221a(";
+			op2=0;
+		} else if (number=="-") {
+			method=method2+"\u221a(";
+			op2=0;
+		}
+		document.getElementById("method").innerHTML=method;
+		if (bracket==0) {
+			b1op=op;
+			b1calc=calc;
+			b1mdop=mdop;
+			b1mdcalc=mdcalc;
+			b1prefix=prefix;
+			b1sqrt=true;
+		} else if (bracket==1) {
+			b2op=op;
+			b2calc=calc;
+			b2mdop=mdop;
+			b2mdcalc=mdcalc;
+			b2prefix=prefix;
+			b2sqrt=true;
+		} else if (bracket==2) {
+			b3op=op;
+			b3calc=calc;
+			b3mdop=mdop;
+			b3mdcalc=mdcalc;
+			b3prefix=prefix;
+			b3sqrt=true;
+		} else if (bracket==3) {
+			b4op=op;
+			b4calc=calc;
+			b4mdop=mdop;
+			b4mdcalc=mdcalc;
+			b4prefix=prefix;
+			b4sqrt=true;
+		} else if (bracket==4) {
+			b5op=op;
+			b5calc=calc;
+			b5mdop=mdop;
+			b5mdcalc=mdcalc;
+			b5prefix=prefix;
+			b5sqrt=true;
+		} else if (bracket==5) {
+			b6op=op;
+			b6calc=calc;
+			b6mdop=mdop;
+			b6mdcalc=mdcalc;
+			b6prefix=prefix;
+			b6sqrt=true;
+		} else if (bracket==6) {
+			b7op=op;
+			b7calc=calc;
+			b7mdop=mdop;
+			b7mdcalc=mdcalc;
+			b7prefix=prefix;
+			b7sqrt=true;
+		}
+		number="null";
+		prefix=0;
+		method2=method;
+		msdel1=method2;
+		op=0;
+		mdop=0;
+		op2=0;
+		opstart=false;
+		bracket++;
+		bracketopen=true;
+	} else {
+		invalidinput=true;
+	}
+}
+function functionsin() {
+	if (bracket!=7) {
+		if (point==15) {
+			point=0;
+		}
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		if (floating==true) {
+			n=floatingbase*Math.pow(10,n);
+			floating=false;
+		}
+		point=0;
+		pointdivident="null";
+		if (number!="null"&&number!="-"||varinput==true) {
+			if (mdop==0) {
+				mdcalc=n;
+			} else if (mdop==1) {
+				mdcalc=mdcalc*n;
+			} else if (mdop==2) {
+				mdcalc=mdcalc/n;
+			}
+			point=0;
+			method=method+"*sin(";
+			prefix=0;
+			document.getElementById("calculation").innerHTML=mdcalc;
+			op2=0;
+			mdop=1;
+			if (op==0) {
+				savedcalc=mdcalc;
+			} else if (op==1) {
+				savedcalc=calc+mdcalc;
+			} else if (op==2) {
+				savedcalc=calc-mdcalc;
+			}
+		} else if (number=="null") {
+			method=method2+"sin(";
+			op2=0;
+		} else if (number=="-") {
+			method=method2+"sin(";
+			op2=0;
+		}
+		document.getElementById("method").innerHTML=method;
+		if (bracket==0) {
+			b1op=op;
+			b1calc=calc;
+			b1mdop=mdop;
+			b1mdcalc=mdcalc;
+			b1prefix=prefix;
+			b1sin=true;
+		} else if (bracket==1) {
+			b2op=op;
+			b2calc=calc;
+			b2mdop=mdop;
+			b2mdcalc=mdcalc;
+			b2prefix=prefix;
+			b2sin=true;
+		} else if (bracket==2) {
+			b3op=op;
+			b3calc=calc;
+			b3mdop=mdop;
+			b3mdcalc=mdcalc;
+			b3prefix=prefix;
+			b3sin=true;
+		} else if (bracket==3) {
+			b4op=op;
+			b4calc=calc;
+			b4mdop=mdop;
+			b4mdcalc=mdcalc;
+			b4prefix=prefix;
+			b4sin=true;
+		} else if (bracket==4) {
+			b5op=op;
+			b5calc=calc;
+			b5mdop=mdop;
+			b5mdcalc=mdcalc;
+			b5prefix=prefix;
+			b5sin=true;
+		} else if (bracket==5) {
+			b6op=op;
+			b6calc=calc;
+			b6mdop=mdop;
+			b6mdcalc=mdcalc;
+			b6prefix=prefix;
+			b6sin=true;
+		} else if (bracket==6) {
+			b7op=op;
+			b7calc=calc;
+			b7mdop=mdop;
+			b7mdcalc=mdcalc;
+			b7prefix=prefix;
+			b7sin=true;
+		}
+		number="null";
+		prefix=0;
+		method2=method;
+		msdel1=method2;
+		op=0;
+		mdop=0;
+		op2=0;
+		opstart=false;
+		bracket++;
+		bracketopen=true;
+		varinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function functioncos() {
+	if (bracket!=7) {
+		if (point==15) {
+			point=0;
+		}
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		if (floating==true) {
+			n=floatingbase*Math.pow(10,n);
+			floating=false;
+		}
+		point=0;
+		pointdivident="null";
+		if (number!="null"&&number!="-"||varinput==true) {
+			if (mdop==0) {
+				mdcalc=n;
+			} else if (mdop==1) {
+				mdcalc=mdcalc*n;
+			} else if (mdop==2) {
+				mdcalc=mdcalc/n;
+			}
+			point=0;
+			method=method+"*cos(";
+			prefix=0;
+			document.getElementById("calculation").innerHTML=mdcalc;
+			op2=0;
+			mdop=1;
+			if (op==0) {
+				savedcalc=mdcalc;
+			} else if (op==1) {
+				savedcalc=calc+mdcalc;
+			} else if (op==2) {
+				savedcalc=calc-mdcalc;
+			}
+		} else if (number=="null") {
+			method=method2+"cos(";
+			op2=0;
+		} else if (number=="-") {
+			method=method2+"cos(";
+			op2=0;
+		}
+		document.getElementById("method").innerHTML=method;
+		if (bracket==0) {
+			b1op=op;
+			b1calc=calc;
+			b1mdop=mdop;
+			b1mdcalc=mdcalc;
+			b1prefix=prefix;
+			b1cos=true;
+		} else if (bracket==1) {
+			b2op=op;
+			b2calc=calc;
+			b2mdop=mdop;
+			b2mdcalc=mdcalc;
+			b2prefix=prefix;
+			b2cos=true;
+		} else if (bracket==2) {
+			b3op=op;
+			b3calc=calc;
+			b3mdop=mdop;
+			b3mdcalc=mdcalc;
+			b3prefix=prefix;
+			b3cos=true;
+		} else if (bracket==3) {
+			b4op=op;
+			b4calc=calc;
+			b4mdop=mdop;
+			b4mdcalc=mdcalc;
+			b4prefix=prefix;
+			b4cos=true;
+		} else if (bracket==4) {
+			b5op=op;
+			b5calc=calc;
+			b5mdop=mdop;
+			b5mdcalc=mdcalc;
+			b5prefix=prefix;
+			b5cos=true;
+		} else if (bracket==5) {
+			b6op=op;
+			b6calc=calc;
+			b6mdop=mdop;
+			b6mdcalc=mdcalc;
+			b6prefix=prefix;
+			b6cos=true;
+		} else if (bracket==6) {
+			b7op=op;
+			b7calc=calc;
+			b7mdop=mdop;
+			b7mdcalc=mdcalc;
+			b7prefix=prefix;
+			b7cos=true;
+		}
+		number="null";
+		prefix=0;
+		method2=method;
+		msdel1=method2;
+		op=0;
+		mdop=0;
+		op2=0;
+		opstart=false;
+		bracket++;
+		bracketopen=true;
+		varinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function functiontan() {
+	if (bracket!=7) {
+		if (point==15) {
+			point=0;
+		}
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		if (floating==true) {
+			n=floatingbase*Math.pow(10,n);
+			floating=false;
+		}
+		point=0;
+		pointdivident="null";
+		if (number!="null"&&number!="-"||varinput==true) {
+			if (mdop==0) {
+				mdcalc=n;
+			} else if (mdop==1) {
+				mdcalc=mdcalc*n;
+			} else if (mdop==2) {
+				mdcalc=mdcalc/n;
+			}
+			point=0;
+			method=method+"*tan(";
+			prefix=0;
+			document.getElementById("calculation").innerHTML=mdcalc;
+			op2=0;
+			mdop=1;
+			if (op==0) {
+				savedcalc=mdcalc;
+			} else if (op==1) {
+				savedcalc=calc+mdcalc;
+			} else if (op==2) {
+				savedcalc=calc-mdcalc;
+			}
+		} else if (number=="null") {
+			method=method2+"tan(";
+			op2=0;
+		} else if (number=="-") {
+			method=method2+"tan(";
+			op2=0;
+		}
+		document.getElementById("method").innerHTML=method;
+		if (bracket==0) {
+			b1op=op;
+			b1calc=calc;
+			b1mdop=mdop;
+			b1mdcalc=mdcalc;
+			b1prefix=prefix;
+			b1tan=true;
+		} else if (bracket==1) {
+			b2op=op;
+			b2calc=calc;
+			b2mdop=mdop;
+			b2mdcalc=mdcalc;
+			b2prefix=prefix;
+			b2tan=true;
+		} else if (bracket==2) {
+			b3op=op;
+			b3calc=calc;
+			b3mdop=mdop;
+			b3mdcalc=mdcalc;
+			b3prefix=prefix;
+			b3tan=true;
+		} else if (bracket==3) {
+			b4op=op;
+			b4calc=calc;
+			b4mdop=mdop;
+			b4mdcalc=mdcalc;
+			b4prefix=prefix;
+			b4tan=true;
+		} else if (bracket==4) {
+			b5op=op;
+			b5calc=calc;
+			b5mdop=mdop;
+			b5mdcalc=mdcalc;
+			b5prefix=prefix;
+			b5tan=true;
+		} else if (bracket==5) {
+			b6op=op;
+			b6calc=calc;
+			b6mdop=mdop;
+			b6mdcalc=mdcalc;
+			b6prefix=prefix;
+			b6tan=true;
+		} else if (bracket==6) {
+			b7op=op;
+			b7calc=calc;
+			b7mdop=mdop;
+			b7mdcalc=mdcalc;
+			b7prefix=prefix;
+			b7tan=true;
+		}
+		number="null";
+		prefix=0;
+		method2=method;
+		msdel1=method2;
+		op=0;
+		mdop=0;
+		op2=0;
+		opstart=false;
+		bracket++;
+		bracketopen=true;
+		varinput=false;
+	} else {
+		invalidinput=true;
+	}
+}
+function functionpow() {
+	if (bracketinput==false&&number!="null"&&bracket!=7||bracketinput==false&&varinput==true&&bracket!=7) {
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		var bxn=n;
+		varinput=false;
+		var cont=true;
+	} else if (bracketinput==true&&bracket!=7) {
+		var bxn=bracketsave;
+		var cont=true;
+	}
+	if (cont==true) {
+		method=method+"^(";
+		document.getElementById("method").innerHTML=method;
+		if (bracket==0) {
+			b1op=op;
+			b1calc=calc;
+			b1mdop=mdop;
+			b1mdcalc=mdcalc;
+			b1prefix=prefix;
+			b1power=true;
+			b1n=bxn;
+		} else if (bracket==1) {
+			b2op=op;
+			b2calc=calc;
+			b2mdop=mdop;
+			b2mdcalc=mdcalc;
+			b2prefix=prefix;
+			b2power=true;
+			b2n=bxn;
+		} else if (bracket==2) {
+			b3op=op;
+			b3calc=calc;
+			b3mdop=mdop;
+			b3mdcalc=mdcalc;
+			b3prefix=prefix;
+			b3power=true;
+			b3n=bxn;
+		} else if (bracket==3) {
+			b4op=op;
+			b4calc=calc;
+			b4mdop=mdop;
+			b4mdcalc=mdcalc;
+			b4prefix=prefix;
+			b4power=true;
+			b4n=bxn;
+		} else if (bracket==4) {
+			b5op=op;
+			b5calc=calc;
+			b5mdop=mdop;
+			b5mdcalc=mdcalc;
+			b5prefix=prefix;
+			b5power=true;
+			b5n=bxn;
+		} else if (bracket==5) {
+			b6op=op;
+			b6calc=calc;
+			b6mdop=mdop;
+			b6mdcalc=mdcalc;
+			b6prefix=prefix;
+			b6power=true;
+			b6n=bxn;
+		} else if (bracket==6) {
+			b7op=op;
+			b7calc=calc;
+			b7mdop=mdop;
+			b7mdcalc=mdcalc;
+			b7prefix=prefix;
+			b7power=true;
+			b7n=bxn;
+		}
+		number="null";
+		prefix=0;
+		method2=method;
+		msdel1=method2;
+		op=0;
+		mdop=0;
+		op2=0;
+		opstart=false;
+		bracket++;
+	} else {
+		invalidinput=true;
+	}
+}
+function functionyroot() {
+	if (bracketinput==false&&number!="null"&&bracket!=7||bracketinput==false&&varinput==true&&bracket!=7) {
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		varinput=false;
+		var bxn=n;
+		var cont=true;
+	} else if (bracketinput==true&&bracket!=7) {
+		var bxn=bracketsave;
+		var cont=true;
+	}
+	if (cont==true) {
+		method=method+"yroot(";
+		document.getElementById("method").innerHTML=method;
+		if (bracket==0) {
+			b1op=op;
+			b1calc=calc;
+			b1mdop=mdop;
+			b1mdcalc=mdcalc;
+			b1prefix=prefix;
+			b1yroot=true;
+			b1n=bxn;
+		} else if (bracket==1) {
+			b2op=op;
+			b2calc=calc;
+			b2mdop=mdop;
+			b2mdcalc=mdcalc;
+			b2prefix=prefix;
+			b2yroot=true;
+			b2n=bxn;
+		} else if (bracket==2) {
+			b3op=op;
+			b3calc=calc;
+			b3mdop=mdop;
+			b3mdcalc=mdcalc;
+			b3prefix=prefix;
+			b3yroot=true;
+			b3n=bxn;
+		} else if (bracket==3) {
+			b4op=op;
+			b4calc=calc;
+			b4mdop=mdop;
+			b4mdcalc=mdcalc;
+			b4prefix=prefix;
+			b4yroot=true;
+			b4n=bxn;
+		} else if (bracket==4) {
+			b5op=op;
+			b5calc=calc;
+			b5mdop=mdop;
+			b5mdcalc=mdcalc;
+			b5prefix=prefix;
+			b5yroot=true;
+			b5n=bxn;
+		} else if (bracket==5) {
+			b6op=op;
+			b6calc=calc;
+			b6mdop=mdop;
+			b6mdcalc=mdcalc;
+			b6prefix=prefix;
+			b6yroot=true;
+			b6n=bxn;
+		} else if (bracket==6) {
+			b7op=op;
+			b7calc=calc;
+			b7mdop=mdop;
+			b7mdcalc=mdcalc;
+			b7prefix=prefix;
+			b7yroot=true;
+			b7n=bxn;
+		}
+		number="null";
+		prefix=0;
+		method2=method;
+		msdel1=method2;
+		op=0;
+		mdop=0;
+		op2=0;
+		opstart=false;
+		bracket++;
+		bracketopen=true;
+	} else {
+		invalidinput=true;
+	}
+}
+function functionfloat() {
+	if (bracketinput==false&&number!="null"||bracketinput==false&&varinput==true) {
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		varinput=false;
+		floatingbase=n;
+		number="null";
+		method=method+"*10^";
+		method2=method;
+		op2=0;
+		document.getElementById("method").innerHTML=method;
+		document.getElementById("calculation").innerHTML=n;
+		opstart=false;
+		floating=true;
+	} else if (bracketinput==true) {
+		floatingbase=bracketsave;
+		number="null"
+		method=method+"*10^";
+		method2=method;
+		op2=0;
+		document.getElementById("method").innerHTML=method;
+		document.getElementById("calculation").innerHTML=n;
+		opstart=false;
+		floating=true;
+	} else {
+		invalidinput=true;
+	}
+}
+function functiondel() {
+	if (mkey1=="[Invalid input]") {
+		mkey1="";
+		document.getElementById("keyinput1").innerHTML=mkey1;
+	} else if (keyinput==true) {
+		functionckeyinput();
+	} else if (bracketinput==false) {
+		method2=msdel1;
+		method=msdel2;
+		number="null";
+		n=0;
+		varinput=false;
+		op2=1;
+		prefix=0;
+		document.getElementById("method").innerHTML=method2;
+		if (method2=="> ") {
+			functionendcalc();
+			document.getElementById("calculation").innerHTML=calc;
+		}
+		if (method2.substring(method2.length-1,method2.length)=="(") {
+			bracketopen=true;
+			opstart=false;
+		}
+	}
+}
+document.addEventListener("keydown", function(event) {
+	event.preventDefault();
+    if (event.keyCode==16) {
+		keyshift=true;
+	} if (event.keyCode==17) {
+		keyctrl==false;
+	} if (event.keyCode==18) {
+		keyalt==true;
+	} if (event.keyCode==13) {
+		keyreturn=true;
+		functionkeys();
+	} if (event.keyCode==8) {
+		keybackspace=true;
+		functionkeys();
+	} if (event.keyCode==27) {
+		keyescape=true;
+		functionkeys();
+	} if (event.keyCode==48) {
+		key0=true;
+		functionkeys();
+	} if (event.keyCode==49) {
+		key1=true;
+		functionkeys();
+	} if (event.keyCode==50) {
+		key2=true;
+		functionkeys();
+	} if (event.keyCode==51) {
+		key3=true;
+		functionkeys();
+	} if (event.keyCode==52) {
+		key4=true;
+		functionkeys();
+	} if (event.keyCode==53) {
+		key5=true;
+		functionkeys();
+	} if (event.keyCode==54) {
+		key6=true;
+		functionkeys();
+	} if (event.keyCode==55) {
+		key7=true;
+		functionkeys();
+	} if (event.keyCode==56) {
+		key8=true;
+		functionkeys();
+	} if (event.keyCode==57) {
+		key9=true;
+		functionkeys();
+	} if (event.keyCode==187) {
+		keyequal=true;
+		functionkeys();
+	} if (event.keyCode==189) {
+		keyminus=true;
+		functionkeys();
+	} if (event.keyCode==220) {
+		keybackslash=true;
+		functionkeys();
+	} if (event.keyCode==190) {
+		keyperiod=true;
+		functionkeys();
+	} if (event.keyCode==65) {
+		keya=true;
+		functionkeys();
+	} if (event.keyCode==66) {
+		keyb=true;
+		functionkeys();
+	} if (event.keyCode==67) {
+		keyc=true;
+		functionkeys();
+	} if (event.keyCode==68) {
+		keyd=true;
+		functionkeys();
+	} if (event.keyCode==69) {
+		keye=true;
+		functionkeys();
+	} if (event.keyCode==70) {
+		keyf=true;
+		functionkeys();
+	} if (event.keyCode==71) {
+		keyg=true;
+		functionkeys();
+	} if (event.keyCode==72) {
+		keyh=true;
+		functionkeys();
+	} if (event.keyCode==73) {
+		keyi=true;
+		functionkeys();
+	} if (event.keyCode==74) {
+		keyj=true;
+		functionkeys();
+	} if (event.keyCode==75) {
+		keyk=true;
+		functionkeys();
+	} if (event.keyCode==76) {
+		keyl=true;
+		functionkeys();
+	} if (event.keyCode==77) {
+		keym=true;
+		functionkeys();
+	} if (event.keyCode==78) {
+		keyn=true;
+		functionkeys();
+	} if (event.keyCode==79) {
+		keyo=true;
+		functionkeys();
+	} if (event.keyCode==80) {
+		keyp=true;
+		functionkeys();
+	} if (event.keyCode==81) {
+		keyq=true;
+		functionkeys();
+	} if (event.keyCode==82) {
+		keyr=true;
+		functionkeys();
+	} if (event.keyCode==83) {
+		keys=true;
+		functionkeys();
+	} if (event.keyCode==84) {
+		keyt=true;
+		functionkeys();
+	} if (event.keyCode==85) {
+		keyu=true;
+		functionkeys();
+	} if (event.keyCode==86) {
+		keyv=true;
+		functionkeys();
+	} if (event.keyCode==87) {
+		keyw=true;
+		functionkeys();
+	} if (event.keyCode==88) {
+		keyx=true;
+		functionkeys();
+	} if (event.keyCode==89) {
+		keyy=true;
+		functionkeys();
+	} if (event.keyCode==90) {
+		keyz=true;
+		functionkeys();
+	} if (event.keyCode==9) {
+		keytab=true;
+		functionkeys();
+	} if (event.keyCode==32) {
+		keyspace=true;
+		functionkeys();
+	} if (event.keyCode==219) {
+		keyopenbracket=true;
+		functionkeys();
+	} if (event.keyCode==221) {
+		keyclosebracket=true;
+		functionkeys();
+	} if (event.keyCode==191) {
+		keyslash=true;
+		functionkeys();
+	} if (event.keyCode==188) {
+		keycomma=true;
+		functionkeys();
+	} if (event.keyCode==186) {
+		keysemicolon=true;
+		functionkeys();
+	} if (event.keyCode==192) {
+		keygraveaccent=true;
+		functionkeys();
+	} if (event.keyCode==222) {
+		keysinglequote=true;
+		functionkeys();
+	} if (event.keyCode==37) {
+		keyleft=true;
+		functionkeys();
+	} if (event.keyCode==39) {
+		keyright=true;
+		functionkeys();
+	} if (event.keyCode==226) {
+		keyleftbackslash=true;
+		functionkeys();
+	}
+});
+document.addEventListener("keyup", function(event) {
+    if (event.keyCode==16) {
+		keyshift=false;
+	} if (event.keyCode==17) {
+		keyctrl==false;
+	} if (event.keyCode==18) {
+		keyalt==false;
+	}
+	if (warned2==false) {
+		alert("IMPORTANT:\nRight now, keyboard input is very experimental! If space or return is pressed while a button is highlighted (by clicking it before or pressing TAB), the button will be executed instead of the keyboard input. Also, TAB could navigate you outside the window. Use \"=\" on the keyboard instead of \"Return\" to get around this bug or click inside the window before pressing \"Return\" if you are really into pressing that button.\nIt is being worked on a fix! :)");
+		warned2=true;
+	}
+});
+function functionkeys() {
+	if (mkey1=="[Invalid input]") {
+		mkey1="";
+		document.getElementById("keyinput1").innerHTML=mkey1;
+	}
+	if (inputmethod==1&&keyshift==true&&key0==true||inputmethod==0&&keyshift==false&&keyequal==true) {
+		var clearmethod=false;
+	} else {
+		var clearmethod=true;
+	}
+	if (calcend==1&&keyreturn==false) {
+		if (clearmethod==true) {
+			document.getElementById("method").innerHTML="> ";
+			calcend--;
+		}
+	}
+	if (keyinput==false) {
+		if (keyshift==true) {
+			if (key6==true) {
+				if (inputmethod==0) {
+					functionpower();
+					functionalways();
+					key7=false;
+					var stopfunction=true;
+				}
+			}
+			if (key7==true) {
+				if (inputmethod==1) {
+					functiondivide();
+					functionalways();
+					key7=false;
+					var stopfunction=true;
+				}
+			}
+			if (key8==true) {
+				if (inputmethod==0) {
+					functiontimes();
+					functionalways();
+				} else if (inputmethod==1) {
+					functionbracketopen();
+					functionalways();
+				}
+				key8=false;
+				var stopfunction=true;
+			}
+			if (key9==true) {
+				if (inputmethod==0) {
+					functionbracketopen();
+					functionalways();
+				} else if (inputmethod==1) {
+					functionbracketclose();
+					functionalways();
+				}
+				key9=false;
+				var stopfunction=true;
+			}
+			if (key0==true) {
+				if (inputmethod==0) {
+					functionbracketclose();
+					functionalways();
+				} else if (inputmethod==1) {
+					functionequal();
+					functionalways();
+				}
+				key0=false;
+				var stopfunction=true;
+			}
+			if (keyequal==true) {
+				if (inputmethod==0) {
+					functionplus();
+					functionalways();
+				} else if (inputmethod==1) {
+					functionmultiply();
+					functionalways();
+				}
+				keyequal=false;
+				var stopfunction=true;
+			}
+		} else if (keyctrl==true&&keyalt==true) {
+			if (key2==true) {
+				if (inputmethod==1) {
+					functionsquare();
+					functionalways();
+					key2=false;
+					var stopfunction=true;
+				}
+			}
+		} else {
+			if (key1==true) {
+				function1();
+				functionalways();
+				key1=false;
+				var stopfunction=true;
+			}
+			if (key2==true) {
+				function2();
+				functionalways();
+				key2=false;
+				var stopfunction=true;
+			}
+			if (key3==true) {
+				function3();
+				functionalways();
+				key3=false;
+				var stopfunction=true;
+			}
+			if (key4==true) {
+				function4();
+				functionalways();
+				key4=false;
+				var stopfunction=true;
+			}
+			if (key5==true) {
+				function5();
+				functionalways();
+				key5=false;
+				var stopfunction=true;
+			}
+			if (key6==true) {
+				function6();
+				functionalways();
+				key6=false;
+				var stopfunction=true;
+			}
+			if (key7==true) {
+				function7();
+				functionalways();
+				key7=false;
+				var stopfunction=true;
+			}
+			if (key8==true) {
+				function8();
+				functionalways();
+				key8=false;
+				var stopfunction=true;
+			}
+			if (key9==true) {
+				function9();
+				functionalways();
+				key9=false;
+				var stopfunction=true;
+			}
+			if (key0==true) {
+				function0();
+				functionalways();
+				key0=false;
+				var stopfunction=true;
+			}
+			if (keyequal==true) {
+				if (inputmethod==0) {
+					functionequal();
+					functionalways();
+				} else if (inputmethod==1) {
+					functionplus();
+					functionalways();
+				}
+				keyequal=false;
+				var stopfunction=true;
+			}
+			if (keyminus==true) {
+				functionminus();
+				functionalways();
+				keyminus=false;
+				var stopfunction=true;
+			}
+			if (keyperiod==true) {
+				functionpoint();
+				functionalways();
+				keyperiod=false;
+				var stopfunction=true;
+			}
+			if (keybackslash==true) {
+				if (inputmethod==1) {
+					functionpow();
+					functionalways();
+					keybackslash=false;
+					var stopfunction=true;
+				}
+			}
+			if (keyslash==true) {
+				if (inputmethod==0) {
+					functiondivide();
+					functionalways();
+					keyslash=false;
+					var stopfunction=true;
+				}
+			}
+		}
+		if (keyreturn==true) {
+			functionequal();
+			functionalways();
+			keyreturn=false;
+			var stopfunction=true;
+		}
+	}
+	if (keyescape==true) {
+		functionclear();
+		functionalways();
+		keyescape=false;
+		var stopfunction=true;
+	}
+	if (keybackspace==true) {
+		functiondel();
+		keybackspace=false;
+		var stopfunction=true;
+	}
+	if (keyinput==true||stopfunction!=true) {
+		keyinput=true;
+		if (keyshift==true) {
+			if (keybackslash==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"|";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"°";
+				}
+				keybackslash=false;
+				var keypresstest=true;
+			}
+			if (key1==true) {
+				mkey1=mkey1+"!";
+				key1=false;
+				var keypresstest=true;
+			}
+			if (key2==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"@";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"\"";
+				}
+				key2=false;
+				var keypresstest=true;
+			}
+			if (key3==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"#";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"§";
+				}
+				key3=false;
+				var keypresstest=true;
+			}
+			if (key4==true) {
+				mkey1=mkey1+"$";
+				key4=false;
+				var keypresstest=true;
+			}
+			if (key5==true) {
+				mkey1=mkey1+"%";
+				key5=false;
+				var keypresstest=true;
+			}
+			if (key6==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"^";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"&";
+				}
+				key6=false;
+				var keypresstest=true;
+			}
+			if (key7==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"&";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"/";
+				}
+				key7=false;
+				var keypresstest=true;
+			}
+			if (key8==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"*";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"(";
+				}
+				key8=false;
+				var keypresstest=true;
+			}
+			if (key9==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"(";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+")";
+				}
+				key9=false;
+				var keypresstest=true;
+			}
+			if (key0==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+")";
+					var keypresstest=true;
+				} else if (inputmethod==1) {
+					functionreturnoncommand();
+				}
+				key0=false;
+			}
+			if (keyopenbracket==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"{";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"?";
+				}
+				keyopenbracket=false;
+				var keypresstest=true;
+			}
+			if (keyclosebracket==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"}";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"";
+				}
+				keyclosebracket=false;
+				var keypresstest=true;
+			}
+			if (keyq==true) {
+				mkey1=mkey1+"Q";
+				keyq=false;
+				var keypresstest=true;
+			}
+			if (keyw==true) {
+				mkey1=mkey1+"W";
+				keyw=false;
+				var keypresstest=true;
+			}
+			if (keye==true) {
+				mkey1=mkey1+"E";
+				keye=false;
+				var keypresstest=true;
+			}
+			if (keyr==true) {
+				mkey1=mkey1+"R";
+				keyr=false;
+				var keypresstest=true;
+			}
+			if (keyt==true) {
+				mkey1=mkey1+"T";
+				keyt=false;
+				var keypresstest=true;
+			}
+			if (keyz==true) {
+				mkey1=mkey1+"Z";
+				keyz=false;
+				var keypresstest=true;
+			}
+			if (keyu==true) {
+				mkey1=mkey1+"U";
+				keyu=false;
+				var keypresstest=true;
+			}
+			if (keyi==true) {
+				mkey1=mkey1+"I";
+				keyi=false;
+				var keypresstest=true;
+			}
+			if (keyo==true) {
+				mkey1=mkey1+"O";
+				keyo=false;
+				var keypresstest=true;
+			}
+			if (keyp==true) {
+				mkey1=mkey1+"P";
+				keyp=false;
+				var keypresstest=true;
+			}
+			if (keysemicolon==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+":";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"Ü";
+				}
+				keysemicolon=false;
+				var keypresstest=true;
+			}
+			if (keyequal==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"+";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"*";
+				}
+				keyequal=false;
+				var keypresstest=true;
+			}
+			if (keya==true) {
+				mkey1=mkey1+"A";
+				keya=false;
+				var keypresstest=true;
+			}
+			if (keys==true) {
+				mkey1=mkey1+"S";
+				keys=false;
+				var keypresstest=true;
+			}
+			if (keyd==true) {
+				mkey1=mkey1+"D";
+				keyd=false;
+				var keypresstest=true;
+			}
+			if (keyf==true) {
+				mkey1=mkey1+"F";
+				keyf=false;
+				var keypresstest=true;
+			}
+			if (keyg==true) {
+				mkey1=mkey1+"G";
+				keyg=false;
+				var keypresstest=true;
+			}
+			if (keyh==true) {
+				mkey1=mkey1+"H";
+				keyh=false;
+				var keypresstest=true;
+			}
+			if (keyj==true) {
+				mkey1=mkey1+"J";
+				keyj=false;
+				var keypresstest=true;
+			}
+			if (keyk==true) {
+				mkey1=mkey1+"K";
+				keyk=false;
+				var keypresstest=true;
+			}
+			if (keyl==true) {
+				mkey1=mkey1+"L";
+				keyl=false;
+				var keypresstest=true;
+			}
+			if (keygraveaccent==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"~";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"Ö";
+				}
+				keygraveaccent=false;
+				var keypresstest=true;
+			}
+			if (keysinglequote==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"\"";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"Ä";
+				}
+				keysinglequote=false;
+				var keypresstest=true;
+			}
+			if (keyslash==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"?";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"'";
+				}
+				keyslash=false;
+				var keypresstest=true;
+			}
+			if (keyleftbackslash==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"|";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+">";
+				}
+				keyleftbackslash=false;
+				var keypresstest=true;
+			}
+			if (keyy==true) {
+				mkey1=mkey1+"Y";
+				keyy=false;
+				var keypresstest=true;
+			}
+			if (keyx==true) {
+				mkey1=mkey1+"X";
+				keyx=false;
+				var keypresstest=true;
+			}
+			if (keyc==true) {
+				mkey1=mkey1+"C";
+				keyc=false;
+				var keypresstest=true;
+			}
+			if (keyv==true) {
+				mkey1=mkey1+"V";
+				keyv=false;
+				var keypresstest=true;
+			}
+			if (keyb==true) {
+				mkey1=mkey1+"B";
+				keyb=false;
+				var keypresstest=true;
+			}
+			if (keyn==true) {
+				mkey1=mkey1+"N";
+				keyn=false;
+				var keypresstest=true;
+			}
+			if (keym==true) {
+				mkey1=mkey1+"M";
+				keym=false;
+				var keypresstest=true;
+			}
+			if (keycomma==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"<";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+";";
+				}
+				keycomma=false;
+				var keypresstest=true;
+			}
+			if (keyperiod==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+">";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+":";
+				}
+				keyperiod=false;
+				var keypresstest=true;
+			}
+			if (keyminus==true) {
+				mkey1=mkey1+"_";
+				keyminus=false;
+				var keypresstest=true;
+			}
+		} else if (keyctrl==true&&keyalt==true&&inputmethod==1) {
+			if (key2==true) {
+				mkey1=mkey1+"²";
+				keyminus=false;
+				var keypresstest=true;
+			}
+			if (key3==true) {
+				mkey1=mkey1+"³";
+				keyminus=false;
+				var keypresstest=true;
+			}
+			if (key7==true) {
+				mkey1=mkey1+"{";
+				keyminus=false;
+				var keypresstest=true;
+			}
+			if (key8==true) {
+				mkey1=mkey1+"[";
+				keyminus=false;
+				var keypresstest=true;
+			}
+			if (key9==true) {
+				mkey1=mkey1+"]";
+				keyminus=false;
+			}
+			if (key0==true) {
+				mkey1=mkey1+"}";
+				keyminus=false;
+				var keypresstest=true;
+			}
+			if (keyopenbracket==true) {
+				mkey1=mkey1+"\\";
+				keyminus=false;
+				var keypresstest=true;
+			}
+			if (keyq==true) {
+				mkey1=mkey1+"@";
+				keyminus=false;
+				var keypresstest=true;
+			}
+			if (keye==true) {
+				mkey1=mkey1+"€";
+				keyminus=false;
+				var keypresstest=true;
+			}
+			if (keyequal==true) {
+				mkey1=mkey1+"~";
+				keyminus=false;
+				var keypresstest=true;
+			}
+			if (keyleftbackslash==true) {
+				mkey1=mkey1+"|";
+				keyminus=false;
+				var keypresstest=true;
+			}
+			if (keym==true) {
+				mkey1=mkey1+"µ";
+				keyminus=false;
+				var keypresstest=true;
+			}
+		} else {
+			if (keybackslash==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"/";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"^";
+				}
+				keybackslash=false;
+				var keypresstest=true;
+			}
+			if (key1==true) {
+				mkey1=mkey1+"1";
+				key1=false;
+				var keypresstest=true;
+			}
+			if (key2==true) {
+				mkey1=mkey1+"2";
+				key2=false;
+				var keypresstest=true;
+			}
+			if (key3==true) {
+				mkey1=mkey1+"3";
+				key3=false;
+				var keypresstest=true;
+			}
+			if (key4==true) {
+				mkey1=mkey1+"4";
+				key4=false;
+				var keypresstest=true;
+			}
+			if (key5==true) {
+				mkey1=mkey1+"5";
+				key5=false;
+				var keypresstest=true;
+			}
+			if (key6==true) {
+				mkey1=mkey1+"6";
+				key6=false;
+				var keypresstest=true;
+			}
+			if (key7==true) {
+				mkey1=mkey1+"7";
+				key7=false;
+				var keypresstest=true;
+			}
+			if (key8==true) {
+				mkey1=mkey1+"8";
+				key8=false;
+				var keypresstest=true;
+			}
+			if (key9==true) {
+				mkey1=mkey1+"9";
+				key9=false;
+				var keypresstest=true;
+			}
+			if (key0==true) {
+				mkey1=mkey1+"0";
+				key0=false;
+				var keypresstest=true;
+			}
+			if (keyopenbracket==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"[";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"ß";
+				}
+				keyopenbracket=false;
+				var keypresstest=true;
+			}
+			if (keyclosebracket==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"]";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"´";
+				}
+				keyclosebracket=false;
+			}
+			if (keyq==true) {
+				mkey1=mkey1+"q";
+				keyq=false;
+				var keypresstest=true;
+			}
+			if (keyw==true) {
+				mkey1=mkey1+"w";
+				keyw=false;
+				var keypresstest=true;
+			}
+			if (keye==true) {
+				mkey1=mkey1+"e";
+				keye=false;
+				var keypresstest=true;
+			}
+			if (keyr==true) {
+				mkey1=mkey1+"r";
+				keyr=false;
+				var keypresstest=true;
+			}
+			if (keyt==true) {
+				mkey1=mkey1+"t";
+				keyt=false;
+				var keypresstest=true;
+			}
+			if (keyz==true) {
+				mkey1=mkey1+"z";
+				keyz=false;
+				var keypresstest=true;
+			}
+			if (keyu==true) {
+				mkey1=mkey1+"u";
+				keyu=false;
+				var keypresstest=true;
+			}
+			if (keyi==true) {
+				mkey1=mkey1+"i";
+				keyi=false;
+				var keypresstest=true;
+			}
+			if (keyo==true) {
+				mkey1=mkey1+"o";
+				keyo=false;
+				var keypresstest=true;
+			}
+			if (keyp==true) {
+				mkey1=mkey1+"p";
+				keyp=false;
+				var keypresstest=true;
+			}
+			if (keysemicolon==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+";";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"ü";
+				}
+				keysemicolon=false;
+				var keypresstest=true;
+			}
+			if (keyequal==true) {
+				if (inputmethod==0) {
+					functionreturnoncommand();
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"+";
+					var keypresstest=true;
+				}
+				keyequal=false;
+			}
+			if (keya==true) {
+				mkey1=mkey1+"a";
+				keya=false;
+				var keypresstest=true;
+			}
+			if (keys==true) {
+				mkey1=mkey1+"s";
+				keys=false;
+				var keypresstest=true;
+			}
+			if (keyd==true) {
+				mkey1=mkey1+"d";
+				keyd=false;
+				var keypresstest=true;
+			}
+			if (keyf==true) {
+				mkey1=mkey1+"f";
+				keyf=false;
+				var keypresstest=true;
+			}
+			if (keyg==true) {
+				mkey1=mkey1+"g";
+				keyg=false;
+				var keypresstest=true;
+			}
+			if (keyh==true) {
+				mkey1=mkey1+"h";
+				keyh=false;
+				var keypresstest=true;
+			}
+			if (keyj==true) {
+				mkey1=mkey1+"j";
+				keyj=false;
+				var keypresstest=true;
+			}
+			if (keyk==true) {
+				mkey1=mkey1+"k";
+				keyk=false;
+				var keypresstest=true;
+			}
+			if (keyl==true) {
+				mkey1=mkey1+"l";
+				keyl=false;
+				var keypresstest=true;
+			}
+			if (keygraveaccent==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"`";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"ö";
+				}
+				keygraveaccent=false;
+				var keypresstest=true;
+			}
+			if (keysinglequote==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"'";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"ä";
+				}
+				keysinglequote=false;
+				var keypresstest=true;
+			}
+			if (keyslash==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"/";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"#";
+				}
+				keyslash=false;
+				var keypresstest=true;
+			}
+			if (keyleftbackslash==true) {
+				if (inputmethod==0) {
+					mkey1=mkey1+"\\";
+				} else if (inputmethod==1) {
+					mkey1=mkey1+"<";
+				}
+				keyleftbackslash=false;
+				var keypresstest=true;
+			}
+			if (keyy==true) {
+				mkey1=mkey1+"y";
+				keyy=false;
+				var keypresstest=true;
+			}
+			if (keyx==true) {
+				mkey1=mkey1+"x";
+				keyx=false;
+				var keypresstest=true;
+			}
+			if (keyc==true) {
+				mkey1=mkey1+"c";
+				keyc=false;
+				var keypresstest=true;
+			}
+			if (keyv==true) {
+				mkey1=mkey1+"v";
+				keyv=false;
+				var keypresstest=true;
+			}
+			if (keyb==true) {
+				mkey1=mkey1+"b";
+				keyb=false;
+				var keypresstest=true;
+			}
+			if (keyn==true) {
+				mkey1=mkey1+"n";
+				keyn=false;
+				var keypresstest=true;
+			}
+			if (keym==true) {
+				mkey1=mkey1+"m";
+				keym=false;
+				var keypresstest=true;
+			}
+			if (keycomma==true) {
+				mkey1=mkey1+",";
+				keycomma=false;
+				var keypresstest=true;
+			}
+			if (keyperiod==true) {
+				mkey1=mkey1+".";
+				keyperiod=false;
+				var keypresstest=true;
+			}
+			if (keyminus==true) {
+				mkey1=mkey1+"-";
+				keyminus=false;
+				var keypresstest=true;
+			}
+		}
+		if (keyspace==true) {
+			mkey1=mkey1+" ";
+			keyspace=false;
+		}
+		if (keyright==true||keytab==true||keyleft==true) {
+			if (mkey1=="") {
+				if (keytabswitch==-1) {
+					mkey2="ans [<font color='#9f9fff'>ans</font>, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+					keytabswitch++;
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==0) {
+					if (keyright==true||keytab==true) {
+						mkey2="bracket [ans, <font color='#9f9fff'>bracket</font>, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="yroot( [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, <font color='#9f9fff'>yroot(</font>]";
+						keytabswitch=14;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==1) {
+					if (keyright==true||keytab==true) {
+						mkey2="cos( [ans, bracket, <font color='#9f9fff'>cos(</font>, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="ans [<font color='#9f9fff'>ans</font>, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==2) {
+					if (keyright==true||keytab==true) {
+						mkey2="divided by [ans, bracket, cos(, <font color='#9f9fff'>divided by</font>, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="bracket [ans, <font color='#9f9fff'>bracket</font>, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==3) {
+					if (keyright==true||keytab==true) {
+						mkey2="exp [ans, bracket, cos(, divided by, <font color='#9f9fff'>exp</font>, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="cos( [ans, bracket, <font color='#9f9fff'>cos(</font>, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==4) {
+					if (keyright==true||keytab==true) {
+						mkey2="minus [ans, bracket, cos(, divided by, exp, <font color='#9f9fff'>minus</font>, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="divided by [ans, bracket, cos(, <font color='#9f9fff'>divided by</font>, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==5) {
+					if (keyright==true||keytab==true) {
+						mkey2="pi [ans, bracket, cos(, divided by, exp, minus, <font color='#9f9fff'>pi</font>, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="exp [ans, bracket, cos(, divided by, <font color='#9f9fff'>exp</font>, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==6) {
+					if (keyright==true||keytab==true) {
+						mkey2="plus [ans, bracket, cos(, divided by, exp, minus, pi, <font color='#9f9fff'>plus</font>, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="minus [ans, bracket, cos(, divided by, exp, <font color='#9f9fff'>minus</font>, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==7) {
+					if (keyright==true||keytab==true) {
+						mkey2="pow( [ans, bracket, cos(, divided by, exp, minus, pi, plus, <font color='#9f9fff'>pow(</font>, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="pi [ans, bracket, cos(, divided by, exp, minus, <font color='#9f9fff'>pi</font>, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==8) {
+					if (keyright==true||keytab==true) {
+						mkey2="sin( [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, <font color='#9f9fff'>sin(</font>, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="plus [ans, bracket, cos(, divided by, exp, minus, pi, <font color='#9f9fff'>plus</font>, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==9) {
+					if (keyright==true||keytab==true) {
+						mkey2="sqrt( [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, <font color='#9f9fff'>sqrt(</font>, tan(, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="pow( [ans, bracket, cos(, divided by, exp, minus, pi, plus, <font color='#9f9fff'>pow(</font>, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==10) {
+					if (keyright==true||keytab==true) {
+						mkey2="tan( [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, <font color='#9f9fff'>tan(</font>, times, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="sin( [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, <font color='#9f9fff'>sin(</font>, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==11) {
+					if (keyright==true||keytab==true) {
+						mkey2="times [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, <font color='#9f9fff'>times</font>, to square, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="sqrt( [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, <font color='#9f9fff'>sqrt(</font>, tan(, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==12) {
+					if (keyright==true||keytab==true) {
+						mkey2="to square [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, <font color='#9f9fff'>to square</font>, yroot(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="tan( [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, <font color='#9f9fff'>tan(</font>, times, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==13) {
+					if (keyright==true||keytab==true) {
+						mkey2="yroot [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, <font color='#9f9fff'>yroot(</font>]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="times [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, <font color='#9f9fff'>times</font>, to square, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==14) {
+					if (keyright==true||keytab==true) {
+						mkey2="ans [<font color='#9f9fff'>ans</font>, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, to square, yroot(]";
+						keytabswitch=0;
+					} else if (keyleft==true) {
+						mkey2="to square [ans, bracket, cos(, divided by, exp, minus, pi, plus, pow(, sin(, sqrt(, tan(, times, <font color='#9f9fff'>to square</font>, yroot(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				}
+			} else if (mkey1=="p") {
+				if (keytabswitch==0) {
+					if (keyright==true||keytab==true) {
+						mkey2="lus [pi, <font color='9f9fff'>plus</font>, pow(]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="ow( [pi, plus, <font color='9f9fff'>pow(</font>]";
+						keytabswitch=2;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==1) {
+					if (keyright==true||keytab==true) {
+						mkey2="ow( [pi, plus, <font color='9f9fff'>pow(</font>]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="i [<font color='9f9fff'>pi</font>, plus, pow(";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==2) {
+					if (keyright==true||keytab==true) {
+						mkey2="i [<font color='9f9fff'>pi</font>, plus, pow(]";
+						keytabswitch=0;
+					} else if (keyleft==true) {
+						mkey2="lus [pi, <font color='9f9fff'>plus</font>, pow(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				}
+			} else if (mkey1=="s") {
+				if (keytabswitch==0) {
+					if (keyright==true||keytab==true) {
+						mkey2="qrt( [sin(, <font color='9f9fff'>sqrt(</font>]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="qrt( [sin(, <font color='9f9fff'>sqrt(</font>]";
+						keytabswitch=1;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==1) {
+					if (keyright==true||keytab==true) {
+						mkey2="in( [<font color='9f9fff'>sin(</font>, sqrt(]";
+						keytabswitch=0;
+					} else if (keyleft==true) {
+						mkey2="in( [<font color='9f9fff'>sin(</font>, sqrt(]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				}
+			} else if (mkey1=="t") {
+				if (keytabswitch==0) {
+					if (keyright==true||keytab==true) {
+						mkey2="imes [tan(, <font color='9f9fff'>times</font>, to square]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="o square [tan(, times, <font color='9f9fff'>to square</font>]";
+						keytabswitch=2;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==1) {
+					if (keyright==true||keytab==true) {
+						mkey2="o square [tan(, times, <font color='9f9fff'>to square</font>]";
+						keytabswitch++;
+					} else if (keyleft==true) {
+						mkey2="an( [<font color='9f9fff'>tan(</font>, times, times]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				} else if (keytabswitch==2) {
+					if (keyright==true||keytab==true) {
+						mkey2="an( [<font color='9f9fff'>tan(</font>, times, times]";
+						keytabswitch=0;
+					} else if (keyleft==true) {
+						mkey2="imes [tan(, <font color='9f9fff'>times</font>, to square]";
+						keytabswitch--;
+					}
+					document.getElementById("keyinput2").innerHTML=mkey2;
+				}
+			}
+		}
+		document.getElementById("keyinput1").innerHTML=mkey1;
+		if (keypresstest==true) {
+			if (mkey1=="a") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="ns";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="an") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="s";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="ans") {
+				functionanswer();
+				functionalways();
+			} else if (mkey1=="b") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="racket";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="br") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="acket";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="bra") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="cket";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="brac") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="ket";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="brack") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="et";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="bracke") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="t";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="bracket") {
+				functionbracket();
+				functionalways();
+			} else if (mkey1=="c") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="os(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="co") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="s(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="cos") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="cos(") {
+				functioncos();
+				functionalways();
+			} else if (mkey1=="d") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="ivided by";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="di") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="vided by";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="div") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="ided by";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="divi") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="ded by";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="divid") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="ed by";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="divide") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="d by";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="divided") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2=" by";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="divided ") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="by";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="divided b") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="y";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="divided by") {
+				functiondivide();
+				functionalways();
+			} else if (mkey1=="e") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="xp";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="ex") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="p";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="exp") {
+				functionfloat();
+				functionalways();
+			} else if (mkey1=="m") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="inus";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="mi") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="nus";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="min") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="us";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="minu") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="s";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="minus") {
+				functionminus();
+				functionalways();
+			} else if (mkey1=="p") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="i [<font color='9f9fff'>pi</font>, plus, pow(]";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=0;
+			} else if (mkey1=="pi") {
+				functionpi();
+				functionalways();
+			} else if (mkey1=="pl") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="us";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="plu") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="s";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="plus") {
+				functionplus();
+				functionalways();
+			} else if (mkey1=="po") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="w(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="pow") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="pow(") {
+				functionpow();
+				functionalways();
+			} else if (mkey1=="s") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="in( [<font color='9f9fff'>sin(</font>, sqrt(]";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=0;
+			} else if (mkey1=="si") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="n(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="sin") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="sin(") {
+				functionsin();
+				functionalways();
+			} else if (mkey1=="sq") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="rt(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="sqr") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="t(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="sqrt") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="sqrt(") {
+				functionsqrt();
+				functionalways();
+			} else if (mkey1=="t") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="an( [<font color='9f9fff'>tan(</font>, times, to square]";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=0;
+			} else if (mkey1=="ta") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="n(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="tan") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="tan(") {
+				functiontan();
+				functionalways();
+			} else if (mkey1=="ti") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="mes";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="tim") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="es";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="time") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="s";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="times") {
+				functionmultiply();
+				functionalways();
+			} else if (mkey1=="to") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2=" square";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="to ") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="square";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="to s") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="quare";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="to sq") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="uare";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="to squ") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="are";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="to squa") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="re";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="to squar") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="e";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="to square") {
+				functionsquare();
+				functionalways();
+			} else if (mkey1=="y") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="root(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="yr") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="oot(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="yro") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="ot(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="yroo") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="t(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="yroot") {
+				document.getElementById("keyinput1").style.color="#00bf00";
+				mkey2="(";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+				keytabswitch=-1;
+			} else if (mkey1=="yroot(") {
+				functionyroot();
+				functionalways();
+			} else if (mkey1=="meaning of life") {
+				function4();
+				function2();
+				functionalways();
+			} else if (mkey1=="unlimited power") {
+				functionunlimitedpow();
+				functionalways();
+			} else if (mkey1=="feeling lucky") {
+				functionlucky();
+				functionalways();
+			} else if (keyleft==false&&keyright==false) {
+				document.getElementById("keyinput1").style.color="#bf0000";
+				mkey2="";
+				document.getElementById("keyinput2").innerHTML=mkey2;
+			}
+			keypresstest=false;
+		}
+		if (keyreturn==true) {
+			functionreturnoncommand();
+			keyreturn=false;
+		}
+	}
+	keyright=false;
+	keyleft=false;
+	keytab=false;
+}
+function functionreturnoncommand() {
+	if (mkey1=="") {
+		if (keytabswitch==0) {
+			functionanswer();
+		} else if (keytabswitch==1){
+			functionbracket();
+		} else if (keytabswitch==2){
+			functioncos();
+		} else if (keytabswitch==3){
+			functiondivide();
+		} else if (keytabswitch==4){
+			functionfloat();
+		} else if (keytabswitch==5){
+			functionminus();
+		} else if (keytabswitch==6){
+			functionpi();
+		} else if (keytabswitch==7){
+			functionplus();
+		} else if (keytabswitch==8){
+			functionpow();
+		} else if (keytabswitch==9){
+			functionsin();
+		} else if (keytabswitch==10){
+			functionsqrt();
+		} else if (keytabswitch==11){
+			functiontan();
+		} else if (keytabswitch==12){
+			functionmultiply();
+		} else if (keytabswitch==13){
+			functionsquare();
+		} else if (keytabswitch==14){
+			functionyroot();
+		}
+	} else if (mkey1=="a"||mkey1=="an") {
+		functionanswer();
+	} else if (mkey1=="b"||mkey1=="br"||mkey1=="bra"||mkey1=="brac"||mkey1=="brack"||mkey1=="bracke") {
+		functionbracket();
+	} else if (mkey1=="c"||mkey1=="co"||mkey1=="cos") {
+		functioncos();
+	} else if (mkey1=="d"||mkey1=="di"||mkey1=="div"||mkey1=="divi"||mkey1=="divi"||mkey1=="divid"||mkey1=="divide"||mkey1=="divided"||mkey1=="divided "||mkey1=="divided b") {
+		functiondivide();
+	} else if (mkey1=="e"||mkey1=="ex") {
+		functionfloat();
+	} else if (mkey1=="m"||mkey1=="mi"||mkey1=="min"||mkey1=="minu") {
+		functionminus();
+	} else if (mkey1=="p") {
+		if (keytabswitch==0) {
+			functionpi();
+		} else if (keytabswitch==1) {
+			functionplus();
+		} else if (keytabswitch==2) {
+			functionpow();
+		}
+	} else if (mkey1=="pl"||mkey1=="plu") {
+		functionplus();
+	} else if (mkey1=="po"||mkey1=="pow") {
+		functionpow();
+	} else if (mkey1=="s") {
+		if (keytabswitch==0) {
+			functionsin();
+		} else if (keytabswitch==1) {
+			functionsqrt();
+		}
+	} else if (mkey1=="si"||mkey1=="sin") {
+		functionsin();
+	} else if (mkey1=="sq"||mkey1=="sqr"||mkey1=="sqrt") {
+		functionsqrt();
+	} else if (mkey1=="t") {
+		if (keytabswitch==0) {
+			functiontan();
+		} else if (keytabswitch==1) {
+			functionmultiply();
+		} else if (keytabswitch==2) {
+			functionsquare();
+		}
+	} else if (mkey1=="ta"||mkey1=="tan") {
+		functiontan();
+	} else if (mkey1=="ti"||mkey1=="tim"||mkey1=="time") {
+		functionmultiply();
+	} else if (mkey1=="to"||mkey1=="to "||mkey1=="to s"||mkey1=="to sq"||mkey1=="to squ"||mkey1=="to squa"||mkey1=="to squar") {
+		functionsquare();
+	} else if (mkey1=="y"||mkey1=="yr"||mkey1=="yro"||mkey1=="yroo"||mkey1=="yroot") {
+		functionyroot();
+	}
+	functionalways();
+}
+function functionunlimitedpow() {
+	if (bracketinput==false&&number!="null"||bracketinput==false&&varinput==true) {
+		for (var pointloop=point;pointloop>0;pointloop--) {
+			pointdivident=pointdivident+"0";	
+		}
+		if (varinput==false) {
+			if (pointdivident!="null"&&prefix==-2) {
+				n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+			} else if (pointdivident!="null") {
+				n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+			} else {
+				n=parseInt(number);
+			}
+		}
+		n=Math.pow(n,88);
+		varinput=false;
+		method=method+"^88";
+		op2=0;
+		opstart=true;
+		document.getElementById("method").innerHTML=method;
+		document.getElementById("calculation").innerHTML=n;
+		varinput=true;
+	} else if (bracketinput==true) {
+		n=Math.pow(bracketsave,88);
+		method=method+"^88";
+		op2=0;
+		opstart=true;
+		document.getElementById("method").innerHTML=method;
+		document.getElementById("calculation").innerHTML=n;
+		varinput=true;
+	} else {
+		invalidinput=true;
+	}
+}
+function functionlucky() {
+	var luckynumber=Math.floor(Math.random()*1000-600);
+	if (point==15) {
+		point=0;
+	}
+	for (var pointloop=point;pointloop>0;pointloop--) {
+		pointdivident=pointdivident+"0";	
+	}
+	if (varinput==false) {
+		if (pointdivident!="null"&&prefix==-2) {
+			n=parseInt(number)-parseInt(pointdivident)/1000000000000000;
+		} else if (pointdivident!="null") {
+			n=parseInt(number)+parseInt(pointdivident)/1000000000000000;
+		} else {
+			n=parseInt(number);
+		}
+	}
+	if (floating==true) {
+		n=floatingbase*Math.pow(10,n);
+		floating=false;
+	}
+	point=0;
+	pointdivident="null";
+	if (number!="null"&&number!="-"||varinput==true) {
+		msdel2=method;
+		if (mdop==0) {
+			mdcalc=n;
+		} else if (mdop==1) {
+			mdcalc=mdcalc*n;
+		} else if (mdop==2) {
+			mdcalc=mdcalc/n;
+		}
+		point=0;
+		method=method+"*A lucky win or lose?";
+		prefix=0;
+		document.getElementById("calculation").innerHTML=mdcalc;
+		op2=0;
+		mdop=1;
+		n=luckynumber;
+		if (op==0) {
+			savedcalc=mdcalc;
+		} else if (op==1) {
+			savedcalc=calc+mdcalc;
+		} else if (op==2) {
+			savedcalc=calc-mdcalc;
+		}
+	} else if (number=="null") {
+		msdel2=method;
+		n=luckynumber;
+		method=method2+"A lucky win or lose?";
+		op2=0;
+	} else if (number=="-") {
+		msdel2=method;
+		n=luckynumber*-1;
+		method=method2+"A lucky win or lose?";
+		op2=0;
+	}
+	opstart=true;
+	document.getElementById("method").innerHTML=method;
+	if (prefix==1) {
+		prefix=2;
+	} else if (prefix==-1) {
+		prefix=-2;
+	}
+	varinput=true;
+	bracketinput=false;
+}
+function functionckeyinput() {
+	keyinput=false;
+	keytabswitch=-1;
+	mkey1="";
+	document.getElementById("keyinput1").innerHTML=mkey1;
+	mkey2="";
+	document.getElementById("keyinput2").innerHTML=mkey2;
+}
+function functionalways() {
+	if (calcend!=0) {
+		calcend--;
+	}
+	if (invalid!=0) {
+		invalid--;
+		if (invalid==0) {
+			document.getElementById("calculation").style.color="#000000";
+			document.getElementById("calculation").innerHTML=calc;
+		}
+	}
+	functionckeyinput();
+	if (invalidinput==true) {
+		mkey1="[Invalid input]";
+		document.getElementById("keyinput1").innerHTML=mkey1;
+		document.getElementById("keyinput1").style.color="#bf0000";
+		invalidinput=false;
+	} else {
+		mkey1="";
+	}
+}
+function functionunit() {
+	if (unit==0) {
+		document.getElementById("buttonunit").value="RAD";
+		unit=1;
+	} else if (unit==1) {
+		document.getElementById("buttonunit").value="GRAD";
+		unit=2;
+	} else if (unit==2) {
+		document.getElementById("buttonunit").value="DEG";
+		unit=0;
+	}
+}
+function functionendcalc() {
+	document.getElementById("method").innerHTML=method;
+	ans=calc;
+	number="null";
+	mdcalc=0;
+	mdop=0;
+	calc=0;
+	n=0;
+	op=0;
+	op2=1;
+	opstart=false;
+	point=0;
+	pointdivident="null";
+	prefix=0;
+	method="> ";
+	method2="> ";
+	method3="> ";
+	msdel1="> ";
+	savedcalc=0;
+	varinput=false;
+	bracketinput=false;
+	bracketsave=0;
+	bracket=0;
+	mkey1="";
+	mkey2="";
+	document.getElementById("keyinput1").innerHTML=mkey1;
+	document.getElementById("keyinput2").innerHTML=mkey2;
+	keyinput=false;
+	keytabswitch=-1;
+	bracketopen=false;
+}
+/*
+var a=document.cookie;
+cookiename=a.substr(0,a.search('='));
+cookiewert=a.substr(a.search('=')+1,a.search(';'));
+if (cookiewert=='') {
+	cookiewert=a.substr(a.search('=')+1,a.length);
+}
+if (a=="meincookie=1") {
+	document.getElementById("buttoninput").value="German (QWERTZ)";
+	inputmethod=1;
+} else {
+	document.getElementById("buttoninput").value="English (QWERTY)";
+	inputmethod=0;
+}
+*/
+function functioninput(/*exdays*/) {
+	if (inputmethod==0) {
+		document.getElementById("buttoninput").value="German (QWERTZ)";
+		inputmethod=1;
+		/*
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires=" + d.toGMTString();
+		document.cookie = "meincookie=1;" + expires + ";path=/";
+		*/
+	} else if (inputmethod==1) {
+		document.getElementById("buttoninput").value="English (QWERTY)";
+		inputmethod=0;
+		/*
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires=" + d.toGMTString();
+		document.cookie = "meincookie=0;" + expires + ";path=/";
+		*/
+	}
+}
+function functionchange() {
+	if (changelog==false) {
+		document.getElementById("changelogbutton").value="Hide changelog";
+		document.getElementById("changelogtext").innerHTML="Known issues:<br>- Point numbers are converted incorrectly in some calculations.<br>Version 1.2.5 Beta 5<br>- Added some fancy error messages for bad expressions<br>- Fixed a bug where clicking DEL (of pressing Backspace) after variables and some expressions with brackets may display and calculate incorrectly.<br>- Some minor improvements<br>Version 1.2.5 Beta 4<br>- Fixed some bugs which were supposed to be fixed on Beta 3.<br>Version 1.2.5 Beta 3<br>- TAB for switching through auto complete suggestions is back. Right and left arrows can still also be used.<br>- Fixed a bug where Return, Space and TAB keys may trigger unexpected actions.<br>- Fixed a bug where pressing Return or Equal key (Shift + 0 on German keyboard layout) twice would unexpectedly clear the calculation method.<br>- Fixed a bug where a command input may show up next to the old calculation when returning calculation two or more times before.<br>Version 1.2.5 Beta 2<br>- Fixed a bug where command auto completion didn't work with English (QWERTY) input layout using \"=\" key.<br>Version 1.2.5 Beta<br>- Added RAD and GRAD<br>- Added English (QWERTY) input method. This option is only intended to fix compatibility with your keyboard, not to change your entire keyboard layout.<br>- \"[Invalid input]\" text can now be removed by pressing Backspace or clicking DEL. It's still not necessary.<br>- Fixed a bug where automatic bracket opening operations (sin, power, etc.) could open infinite brackets although they were not memorized.<br>- Fixed a bug where clicking \"Paste answer\" without an answer in memory wouldn't show any error message.<br>Version 1.2.4<br>- Replaced command \"power(\" with \"pow(\".<br>- Replaced command \"float\" with \"exp\".<br>- Optimized auto completion and fixed some bugs. TAB has been replaced with Right and Left arrow.<br>- Fixed a memory bug with floating numbers.<br>- Fixed a bug where sometimes a number input after sin, cos and tan may return as \"Invalid input\".<br>Version 1.2.3<br>- Imrpoved keyboard input<br>- Fixed a bug where command input wasn't possible immediately after an invalid input.<br>- Fixed a bug where DEL on a number after a automatic bracket opening (f.e. power, root etc) would delete the whole bracket operation (although it didn't cancelled that).<br>- Fixed a bug where after a calculation is ended but not cleared, command input still wouldn't clear the old calculation in some cases.<br>Version 1.2.2<br>- Bad expressions are now showing [Invalid input]. It can still be continued with calculation.<br>- Fixed a bug where a automatic bracket opening (fe. root) on variable input (such as pi and answer) was leading to issues when a bracket was closed before.<br>- Fixed a bug where after a calculation was ended but not cleared, command input will be shown next to the old calculation when actually starting a new one.<br>- Some minor improvements<br>Version 1.2.1<br>- Some minor improvements<br>Version 1.2<br>- New design<br>- Added keyboard input - Press TAB for commands (Experimental)<br>- Fixed a bug where point numbers got wrong when squaring, powering, taking y root or doing floating point.<br>- Fixed a bug where it wasn't possible to square or power pi and Ans, to take y root of them or do floating point.<br>- Fixed a bug where bracket opening may not be shown after sin, cos and tan.<br>Version 1.1<br>- Added brackets<br>- Added Delete<br>- Added floating point<br>- Added square<br>- Added squareroot<br>- Added power<br>- Added y root<br>- Added pi<br>- Added sin<br>- Added cos<br>- Added tan<br>- Design improvements<br>- Fixed a bug where answer may be calculated wrong in multiplications and divisions.<br>- Fixed a bug where point was ignored in negative solutions.<br>- Fixed a bug where integrers got the point number of the last input number.<br>- Fixed a bug where point in pasted answer was ignored.<br>- Fixed a bug where using only \".\" as a number will end up in wrong calculations. Now this is equivalent to 0.<br>- Some minor improvements<br>Version 1.0.3<br>- Added history<br>- Added \"Paste answer\" to paste answer of last calculation<br>- Fixed a bug where clicking an operation immediately after point will result in \"NaN\".<br>- Fixed a bug where clicking \"Equals\" immediately after clicking an operation may give incorrect solutions.<br>Version 1.0.2<br>- Fixed an issue where divisions may end up in multiplications<br>Version 1.0.1<br>- Added display of calculation method<br>- Added point input - Experimental!! (Button layout will be changed soon!)<br>- Multiplication/Division will now be calculated before Addition/Subtraction<br>- Added ability to input negative numbers<br>- Fixed a bug where clicking two operations will result in \"NaN\"<br>Version 1.0<br>- Initial release";
+		changelog=true;
+	} else {
+		document.getElementById("changelogbutton").value="Show changelog";
+		document.getElementById("changelogtext").innerHTML="";
+		changelog=false;
+	}
+}
+</script>
+</body></html>
