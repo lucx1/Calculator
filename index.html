@@ -40,7 +40,7 @@ input {background:#d0d0d0; margin:2px 2px 2px 2px; border:0 none;}
 </style></head><body><div class="calcdivmethod"><text id="method" class="method"></text><text id="keyinput1" class="keyinput1"></text><text id="keyinput2" class="keyinput2"></text></div><div class="calcdiv"><p id="calculation" class="text"></p></div>
 <center>
 <input type="button" id="buttonunit" onclick="functionunit()" value="DEG" class="optionbtn">
-<input type="button" id="buttoninput" onclick="functioninput()" value="German (QWERTZ)" class="optionbtn"><br>
+<input type="button" id="buttoninput" onclick="functioninput()" value="English (QWERTY)" class="optionbtn"><br>
 </center><table><tr><td><table style="border:0"><tr>
 <td>				<input type="button" id="button1" onclick="function1(),functionalways()" value="1" class="btntable btnf0">
 </td><td>			<input type="button" id="button2" onclick="function2(),functionalways()" value="2" class="btntable btnf0">
@@ -75,19 +75,30 @@ input {background:#d0d0d0; margin:2px 2px 2px 2px; border:0 none;}
 <input type="button" id="buttonclearhistory" onclick="functionclearhistory()" value="Clear history" class="chistorybuttonclear">
 <div class="historydiv"><p class="historytext" id="historyid"></p></div>
 </tr></table>
-<div class="impressumdiv"><p class="impressum" id="impressum"></p>
-<input type="button" id="changelogbutton" onclick="functionchange()" value="Show changelog" class="btnchange"></div>
-<div class="changelogdiv"><p class="impressum" id="changelogtext"></p></div>
+<div class="impressumdiv">
+	<p class="impressum" id="impressum"></p>
+	<input type="button" id="changelogbutton" onclick="functionchange()" value="Show changelog" class="btnchange">
+</div>
+<div class="changelogdiv">
+	<p class="impressum" id="changelogtext"></p>
+</div>
+<div class="impressumdiv">
+	<input type="button" id="legalbutton" onclick="functionlegal()" value="Show legal notes" class="btnchange">
+</div>
+<div class="changelogdiv">
+	<p class="impressum" id="legaltext">By using this calculator, you automatically agree to the terms of use, as well as to the privacy policy. Click the button above to learn more.</p>
+</div>
 <script language="javascript" type="text/javascript">
 //About the calculator and some general stuff
-var cversion="1.2.5"; //Version of calculator
+var cversion="1.2.6"; //Version of calculator
 var devstatus=0; //Status of calculator development (1=Beta, 2=Alpha, 3=Canary)
 var changelog=false; //To test if changelog is expanded
+var legalexp=false; //To test if legal notes are expanded
 var warned=false; //To test if alert was already shown (For experimental things)
 var warned2=true; //Same thing for second alert
 var chistory=""; //Calculation history text variable
 var unit=0; //0=DEG, 1=RAD, 2=GRAD
-var inputmethod=1;
+var inputmethod=0;
 //Main variables for calculation
 var number="null"; //Number string variable
 var calc=0; //Solution of current calculation
@@ -273,6 +284,10 @@ var keyspace=false;
 var keyleft=false;
 var keyright=false;
 var keyleftbackslash=false;
+//Test for system language
+if (navigator.language == 'de_DE' || navigator.language == 'de_AT' || navigator.language == 'de_CH') {
+	functioninput();
+}
 //Actual program
 if (devstatus==0) {
 	var devstring=" ";
@@ -285,7 +300,7 @@ if (devstatus==0) {
 }
 document.getElementById("method").innerHTML=method;
 document.getElementById("calculation").innerHTML=calc;
-document.getElementById("impressum").innerHTML="<strong>Calculator<br>by Lucia Leidl</strong><br>Version "+cversion+devstring+"<br>Design by Domi04151309<br><br>&copy 2017-2018";
+document.getElementById("impressum").innerHTML="<strong>Calculator<br>by Lucia Leidl</strong><br>Version "+cversion+devstring+"<br>Design by Domi04151309<br><br>&copy 2017-2019";
 document.getElementById("historyid").innerHTML="<center>History is empty</center>";
 document.getElementById("buttonsqrt").value="\u221a";
 document.getElementById("buttonyroot").value="y\u221a";
@@ -4784,12 +4799,23 @@ function functioninput(/*exdays*/) {
 function functionchange() {
 	if (changelog==false) {
 		document.getElementById("changelogbutton").value="Hide changelog";
-		document.getElementById("changelogtext").innerHTML="Known issues:<br>- Point numbers are converted incorrectly in some calculations.<br>Version 1.2.5<br>- Added some fancy error messages for bad expressions<br>- TAB for switching through auto complete suggestions is back. Right and left arrows can still also be used.<br>- Added RAD and GRAD<br>- Added English (QWERTY) input method. This option is only intended to fix compatibility with your keyboard, not to change your entire keyboard layout.<br>- \"[Invalid input]\" text can now be removed by pressing Backspace or clicking DEL. It's still not necessary.<br>- Fixed a bug where clicking DEL (of pressing Backspace) after variables and some expressions with brackets may display and calculate incorrectly.<br>- Fixed a bug where Return, Space and TAB keys may trigger unexpected actions.<br>- Fixed a bug where pressing Return or Equal key (Shift + 0 on German keyboard layout) twice would unexpectedly clear the calculation method.<br>- Fixed a bug where a command input may show up next to the old calculation when returning calculation two or more times before.<br>- Fixed a bug where command auto completion didn't work with English (QWERTY) input layout using \"=\" key.<br>- Fixed a bug where automatic bracket opening operations (sin, power, etc.) could open infinite brackets although they were not memorized.<br>- Fixed a bug where clicking \"Paste answer\" without an answer in memory wouldn't show any error message.<br>- Some minor improvements<br>Version 1.2.4<br>- Replaced command \"power(\" with \"pow(\".<br>- Replaced command \"float\" with \"exp\".<br>- Optimized auto completion and fixed some bugs. TAB has been replaced with Right and Left arrow.<br>- Fixed a memory bug with floating numbers.<br>- Fixed a bug where sometimes a number input after sin, cos and tan may return as \"Invalid input\".<br>Version 1.2.3<br>- Imrpoved keyboard input<br>- Fixed a bug where command input wasn't possible immediately after an invalid input.<br>- Fixed a bug where DEL on a number after a automatic bracket opening (f.e. power, root etc) would delete the whole bracket operation (although it didn't cancelled that).<br>- Fixed a bug where after a calculation is ended but not cleared, command input still wouldn't clear the old calculation in some cases.<br>Version 1.2.2<br>- Bad expressions are now showing [Invalid input]. It can still be continued with calculation.<br>- Fixed a bug where a automatic bracket opening (fe. root) on variable input (such as pi and answer) was leading to issues when a bracket was closed before.<br>- Fixed a bug where after a calculation was ended but not cleared, command input will be shown next to the old calculation when actually starting a new one.<br>- Some minor improvements<br>Version 1.2.1<br>- Some minor improvements<br>Version 1.2<br>- New design<br>- Added keyboard input - Press TAB for commands (Experimental)<br>- Fixed a bug where point numbers got wrong when squaring, powering, taking y root or doing floating point.<br>- Fixed a bug where it wasn't possible to square or power pi and Ans, to take y root of them or do floating point.<br>- Fixed a bug where bracket opening may not be shown after sin, cos and tan.<br>Version 1.1<br>- Added brackets<br>- Added Delete<br>- Added floating point<br>- Added square<br>- Added squareroot<br>- Added power<br>- Added y root<br>- Added pi<br>- Added sin<br>- Added cos<br>- Added tan<br>- Design improvements<br>- Fixed a bug where answer may be calculated wrong in multiplications and divisions.<br>- Fixed a bug where point was ignored in negative solutions.<br>- Fixed a bug where integrers got the point number of the last input number.<br>- Fixed a bug where point in pasted answer was ignored.<br>- Fixed a bug where using only \".\" as a number will end up in wrong calculations. Now this is equivalent to 0.<br>- Some minor improvements<br>Version 1.0.3<br>- Added history<br>- Added \"Paste answer\" to paste answer of last calculation<br>- Fixed a bug where clicking an operation immediately after point will result in \"NaN\".<br>- Fixed a bug where clicking \"Equals\" immediately after clicking an operation may give incorrect solutions.<br>Version 1.0.2<br>- Fixed an issue where divisions may end up in multiplications<br>Version 1.0.1<br>- Added display of calculation method<br>- Added point input - Experimental!! (Button layout will be changed soon!)<br>- Multiplication/Division will now be calculated before Addition/Subtraction<br>- Added ability to input negative numbers<br>- Fixed a bug where clicking two operations will result in \"NaN\"<br>Version 1.0<br>- Initial release";
+		document.getElementById("changelogtext").innerHTML="Known issues:<br>- Point numbers are converted incorrectly in some calculations.<br>Version 1.2.6<br>- Input method is set to German (QWERTZ) if system language can be detected as German (Germany, Austria, Switzerland).<br>- Default input language is now English (QWERTY) which is set if detected system language is not German.<br>- Updated terms of use which can now be read directly on this page.<br>- Updated copyright<br>Version 1.2.5<br>- Added some fancy error messages for bad expressions<br>- TAB for switching through auto complete suggestions is back. Right and left arrows can still also be used.<br>- Added RAD and GRAD<br>- Added English (QWERTY) input method. This option is only intended to fix compatibility with your keyboard, not to change your entire keyboard layout.<br>- \"[Invalid input]\" text can now be removed by pressing Backspace or clicking DEL. It's still not necessary.<br>- Fixed a bug where clicking DEL (of pressing Backspace) after variables and some expressions with brackets may display and calculate incorrectly.<br>- Fixed a bug where Return, Space and TAB keys may trigger unexpected actions.<br>- Fixed a bug where pressing Return or Equal key (Shift + 0 on German keyboard layout) twice would unexpectedly clear the calculation method.<br>- Fixed a bug where a command input may show up next to the old calculation when returning calculation two or more times before.<br>- Fixed a bug where command auto completion didn't work with English (QWERTY) input layout using \"=\" key.<br>- Fixed a bug where automatic bracket opening operations (sin, power, etc.) could open infinite brackets although they were not memorized.<br>- Fixed a bug where clicking \"Paste answer\" without an answer in memory wouldn't show any error message.<br>- Some minor improvements<br>Version 1.2.4<br>- Replaced command \"power(\" with \"pow(\".<br>- Replaced command \"float\" with \"exp\".<br>- Optimized auto completion and fixed some bugs. TAB has been replaced with Right and Left arrow.<br>- Fixed a memory bug with floating numbers.<br>- Fixed a bug where sometimes a number input after sin, cos and tan may return as \"Invalid input\".<br>Version 1.2.3<br>- Imrpoved keyboard input<br>- Fixed a bug where command input wasn't possible immediately after an invalid input.<br>- Fixed a bug where DEL on a number after a automatic bracket opening (f.e. power, root etc) would delete the whole bracket operation (although it didn't cancelled that).<br>- Fixed a bug where after a calculation is ended but not cleared, command input still wouldn't clear the old calculation in some cases.<br>Version 1.2.2<br>- Bad expressions are now showing [Invalid input]. It can still be continued with calculation.<br>- Fixed a bug where a automatic bracket opening (fe. root) on variable input (such as pi and answer) was leading to issues when a bracket was closed before.<br>- Fixed a bug where after a calculation was ended but not cleared, command input will be shown next to the old calculation when actually starting a new one.<br>- Some minor improvements<br>Version 1.2.1<br>- Some minor improvements<br>Version 1.2<br>- New design<br>- Added keyboard input - Press TAB for commands (Experimental)<br>- Fixed a bug where point numbers got wrong when squaring, powering, taking y root or doing floating point.<br>- Fixed a bug where it wasn't possible to square or power pi and Ans, to take y root of them or do floating point.<br>- Fixed a bug where bracket opening may not be shown after sin, cos and tan.<br>Version 1.1<br>- Added brackets<br>- Added Delete<br>- Added floating point<br>- Added square<br>- Added squareroot<br>- Added power<br>- Added y root<br>- Added pi<br>- Added sin<br>- Added cos<br>- Added tan<br>- Design improvements<br>- Fixed a bug where answer may be calculated wrong in multiplications and divisions.<br>- Fixed a bug where point was ignored in negative solutions.<br>- Fixed a bug where integrers got the point number of the last input number.<br>- Fixed a bug where point in pasted answer was ignored.<br>- Fixed a bug where using only \".\" as a number will end up in wrong calculations. Now this is equivalent to 0.<br>- Some minor improvements<br>Version 1.0.3<br>- Added history<br>- Added \"Paste answer\" to paste answer of last calculation<br>- Fixed a bug where clicking an operation immediately after point will result in \"NaN\".<br>- Fixed a bug where clicking \"Equals\" immediately after clicking an operation may give incorrect solutions.<br>Version 1.0.2<br>- Fixed an issue where divisions may end up in multiplications<br>Version 1.0.1<br>- Added display of calculation method<br>- Added point input - Experimental!! (Button layout will be changed soon!)<br>- Multiplication/Division will now be calculated before Addition/Subtraction<br>- Added ability to input negative numbers<br>- Fixed a bug where clicking two operations will result in \"NaN\"<br>Version 1.0<br>- Initial release";
 		changelog=true;
 	} else {
 		document.getElementById("changelogbutton").value="Show changelog";
 		document.getElementById("changelogtext").innerHTML="";
 		changelog=false;
+	}
+}
+function functionlegal() {
+	if (legalexp==false) {
+		document.getElementById("legalbutton").value="Hide changelog";
+		document.getElementById("legaltext").innerHTML="By using this calculator, you automatically agree to the terms of use, as well as to the privacy policy.<br><br><strong>Terms of use</strong><br>- You may use this calculator for free and without any further concerns for private use and business.<br>- You may change and distribute this software under the obligation of crediting the original creator.<br>- Distribution even upon editing this software requires keeping the terms of use as is. They must not be changed by anyone.<br>- You may not sell this software to anyone under any circumstances. The calculator must remain free upon distribution whether it has been changed or shared as is.<br><br><strong>Privacy policy</strong><br>- This website does not collect any data at all. Not even anonymously. Cookies? No, not even cookies.<br>- You may always check this by looking into the source code.<br><br>We reserve the right to change any of the above policies at any point in time.";
+		legalexp=true;
+	} else {
+		document.getElementById("legalbutton").value="Show changelog";
+		document.getElementById("legaltext").innerHTML="By using this calculator, you automatically agree to the terms of use, as well as to the privacy policy. Click the button above to learn more.";
+		legalexp=false;
 	}
 }
 </script>
